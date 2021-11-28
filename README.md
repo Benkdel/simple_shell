@@ -95,7 +95,7 @@ TBU
 <p align="center">
 Humberto Tejada - 
 <a href="https://github.com/humtej1204">
-        <img src="https://img.shields.io/badge/Cristhian-mainPage-blue">
+        <img src="https://img.shields.io/badge/Haru-mainPage-blue">
 </a>
 </p>
 
