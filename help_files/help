@@ -1,0 +1,13 @@
+WELCOME TO THIS LIGTHWEIGTH SHELL
+Copyrigth @Humberto Tejada @Carlos Bentin
+
+# This is a simple shell interface build for a project of Holberton School
+
+# usage:
+
+
+# List of commands supported:
+
+1. cd - changing directory to path
+2. ls - listing files
+3. TBU ..... 
