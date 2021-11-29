@@ -14,8 +14,7 @@ int main(int argc, char **argv, char **envir)
 	(void)envir;
 
 	/* Init main struct */
-	init_cmd(&_cmd);
-	_cmd.env_list = envir;
+	init_cmd(&_cmd, envir);
 
 	/* init shell program - display welcoming mssg and authors */
 	init_shell();
@@ -33,12 +32,10 @@ int main(int argc, char **argv, char **envir)
 		if (_cmd.size > 0)
 		{
 			/* Store Input in History File */
-			
-			/* === TODO === */
 
 			/* Parse Input into cmd - using space as delimiter */
 			parse_input(&_cmd);
-		
+
 			/* get built in function if applicable */
 			b_cmd = get_builtin_cmd(_cmd.cmd[0]);
 			if (b_cmd != NULL)
@@ -53,12 +50,14 @@ int main(int argc, char **argv, char **envir)
 		}
 
 		if (_cmd.status_code == SYS_CMD_NOTFOUND)
-			printf("Command not found!\n");
+		{
+			write(STDOUT_FILENO, "Command not found!\n", 20);
+		}
 
 		if (_cmd.status_code == -1)
 		{
-			/* mem_mgmt(&_cmd); */
-			printf("Good Bye!\n");
+			mem_mgmt(&_cmd);
+			write(STDOUT_FILENO, "Good Bye!\n", 11);
 			sleep(1);
 			clear(void);
 			return (0);
@@ -67,6 +66,5 @@ int main(int argc, char **argv, char **envir)
 		/* Print shell desc + USERNAME */
 		print_prompt();
 	}
-
 	return (0);
 }

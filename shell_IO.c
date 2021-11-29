@@ -6,8 +6,9 @@
  */
 void print_prompt()
 {
-	char *buff, *newBuff;
-	size_t len_homeDir = 0, i = 0, tot_len = 0;
+	char *buff, *newBuff, *prompt;
+	size_t len_homeDir = 0, i = 0, j = 0, tot_len = 0;
+	ssize_t count = 0;
 
 	/* get current directory */
 	buff = malloc(sizeof(char) * 100);
@@ -17,34 +18,53 @@ void print_prompt()
 		exit(-1);
 	}
 	getcwd(buff, 100);
+	buff[strlen(buff) - 1] = '\0';
 
 	/* replace home dir with ~ */
 	len_homeDir = strlen(getenv("HOME"));
-	tot_len = strlen(buff) - len_homeDir + 1;
-	
+	tot_len = strlen(buff) - len_homeDir + 2;
+
 	newBuff = malloc(sizeof(char) * tot_len);
 	if (newBuff == NULL)
 	{
 		printf("Error allocating memory in buffer - replacing with ~\n");
 		exit(-1);
 	}
-
+	memset(newBuff, 0, tot_len);
 	newBuff[0] = '~';
 	newBuff[1] = '/';
-
+	j = 2;
 	while (buff[i])
 	{
 		if (i > len_homeDir)
 		{
-			newBuff[i - len_homeDir] = buff[i];
+			newBuff[j] = buff[i];
+			j++;
 		}
 		i++;
 	}
 
-	printf("[shell-v0.1]%s$ ", newBuff);
+	tot_len += 14;
+	prompt = malloc(sizeof(char) * tot_len);
+	if (prompt == NULL)
+	{
+		printf("Error allocating memory in buffer - current directoy\n");
+		exit(EXIT_CODE);
+	}
+	memset(prompt, 0, tot_len);
+
+	prompt = _concat(3, "[shell-v0.1]", newBuff, "$ ");
+	
+	count = write(STDOUT_FILENO, prompt, strlen(buff));
+	if (count == -1)
+	{
+		printf("error trying to write prompt\n");
+		exit(EXIT_CODE);
+	}
 
 	free(buff);
 	free(newBuff);
+	free(prompt);
 }
 
 /**
@@ -57,18 +77,22 @@ void read_command(struct command *_cmd)
 	int i = 0;
 	size_t len = 0;
 	ssize_t nread = 0;
-	
-	fflush(stdin);
+
+	_cmd->input = NULL;
 	nread = getline(&_cmd->input, &len, stdin);
+	if (nread == -1)
+	{
+		mem_mgmt(_cmd);
+		exit_shell(_cmd);
+	}
 
 	/* replacing new line char with nulll */
 	while (_cmd->input[i])
 	{
 		if (_cmd->input[i] == '\n')
-			_cmd->input[i] = ' ';
+			_cmd->input[i] = '\0';
 		i++;
 	}
-	fflush(stdin);
 	_cmd->size += nread;
 }
 

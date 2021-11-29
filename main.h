@@ -10,6 +10,12 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+#include <fcntl.h>
+
+#include <signal.h>
+
+#include <stdarg.h>
+
 
 /* General Macros */
 #define clear(void) write(STDOUT_FILENO, " \033[1;1H\033[2J", 12)
@@ -46,9 +52,9 @@ typedef struct command
 	char **path;
 	char *input;
 	char *full_cmd_path;
-	ssize_t size;
 	int status_code;
 	int flags;
+	ssize_t size;
 } cmd;
 
 /**
@@ -85,14 +91,18 @@ void clear_screen(struct command *_cmd);
 void (*get_builtin_cmd(const char *key))(struct command *);
 
 /* mem_mgmt.c */
-int mem_mgmt(struct command *);
+void mem_mgmt(struct command *);
 void check_overflow(struct command *_cmd, unsigned int new_bytes);
-void init_cmd(struct command *_cmd);
+void init_cmd(struct command *_cmd, char **envir);
+void free_array(char **array);
 
 /* shell_str_helpers */
 void parse_input(struct command *_cmd);
 char *_getenv(char *local_cmd);
 void parse_path(struct command *_cmd);
 void get_cmd_path(struct command *_cmd);
+
+/* _concat.c */
+char *_concat(size_t num_of_buffers, const char * const format, ...);
 
 #endif

@@ -13,13 +13,20 @@ void parse_input(struct command *_cmd)
 	char *currToken;
 	int i = 0;
 
+	if (_input == NULL)
+	{
+		printf("Error allocating memory\n");
+		mem_mgmt(_cmd);
+	}
+
 	do
 	{
 		currToken = strtok(_input, " ");
 		_cmd->cmd[i] = currToken;
 		_input = NULL;
-		i++; 
+		i++;
 	} while (currToken != NULL);
+	free(_input);
 }
 
 /**
@@ -66,23 +73,29 @@ void get_cmd_path(struct command *_cmd)
 
 	len_cmd = strlen(_cmd->cmd[0]);
 
+	/* check if file exists using only command */
+	f_stat = stat(_cmd->cmd[0], &_stat);
+	if (f_stat == 0)
+	{
+		_cmd->full_cmd_path = strdup(_cmd->cmd[0]);
+		_cmd->status_code = SYS_CMD_FOUND;
+		return;
+	}
+
+	/* check if file exists pre appending path */
 	while (path[i])
 	{
 		len_tot = strlen(path[i]) + len_cmd + 2;
 		conc_path = malloc(sizeof(char) * len_tot);
-
 		if (conc_path == NULL)
 		{
 			_cmd->status_code = EXIT_CODE;
 			return;
 		}
 
-		conc_path = strcat(conc_path, path[i]);
-		conc_path = strcat(conc_path, "/");
-		conc_path = strcat(conc_path, _cmd->cmd[0]);
+		conc_path = _concat(3, path[i], "/", _cmd->cmd[0]);
 
 		f_stat = stat(conc_path, &_stat);
-
 		if (f_stat == 0)
 		{
 			_cmd->full_cmd_path = strdup(conc_path);

@@ -18,6 +18,7 @@ void init_shell()
 	printf("\n\n\n*******************"
 	       "***********************");
 	printf("\n\n\nCURRENT USER: @%s\n", user_name);
+	
 }
 
 /**

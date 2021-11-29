@@ -5,20 +5,15 @@
  * @cmd: main data struct
  * Return: 0 if successfully free data, otherwise -1 on error
  */
-int mem_mgmt(struct command *_cmd)
+void mem_mgmt(struct command *_cmd)
 {
 	/* TODO - REVIEW AND DEFINE ERROR TYPES */
 	if (_cmd->cmd != NULL)
 		free(_cmd->cmd);
-	if (_cmd->env_list != NULL)
-		free(_cmd->env_list);
 	if (_cmd->path != NULL)
 		free(_cmd->path);
 	if (_cmd->input != NULL)
 		free(_cmd->input);
-	free(_cmd);
-
-	return (0);
 }
 
 /**
@@ -40,11 +35,11 @@ void check_overflow(struct command *_cmd, unsigned int new_bytes)
  * @_cmd: main struct
  * Return: none - void
  */
-void init_cmd(struct command *_cmd)
+void init_cmd(struct command *_cmd, char **envir)
 {
-	_cmd->cmd = malloc(sizeof(char) * MAXCMDSIZE);
-	_cmd->env_list = malloc(sizeof(char) * MAXCMDSIZE);
-	_cmd->path = malloc(sizeof(char) * MAXCMDSIZE);
+	_cmd->cmd = malloc(sizeof(char *) * MAXCMDSIZE);
+	_cmd->path = malloc(sizeof(char *) * MAXCMDSIZE);
+	_cmd->env_list = envir;
 	_cmd->input = NULL;
 	_cmd->full_cmd_path = NULL;
 	_cmd->status_code = SUCCESS_CODE;
