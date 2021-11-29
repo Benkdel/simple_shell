@@ -61,9 +61,9 @@ void parse_path(struct command *_cmd)
 /**
  * get_cmd_path - gets path of command in envi
  * @_cmd: main data struct
- * Return: none - void function
+ * Return: 2 if succeded, -2 if failed
  */
-void get_cmd_path(struct command *_cmd)
+int get_cmd_path(struct command *_cmd)
 {
 	struct stat _stat;
 	int f_stat, i = 0;
@@ -78,8 +78,7 @@ void get_cmd_path(struct command *_cmd)
 	if (f_stat == 0)
 	{
 		_cmd->full_cmd_path = strdup(_cmd->cmd[0]);
-		_cmd->status_code = SYS_CMD_FOUND;
-		return;
+		return (SYS_CMD_FOUND);
 	}
 
 	/* check if file exists pre appending path */
@@ -88,10 +87,7 @@ void get_cmd_path(struct command *_cmd)
 		len_tot = strlen(path[i]) + len_cmd + 2;
 		conc_path = malloc(sizeof(char) * len_tot);
 		if (conc_path == NULL)
-		{
-			_cmd->status_code = EXIT_CODE;
-			return;
-		}
+			return (SYS_CMD_NOTFOUND);
 
 		conc_path = _concat(3, path[i], "/", _cmd->cmd[0]);
 
@@ -100,11 +96,10 @@ void get_cmd_path(struct command *_cmd)
 		{
 			_cmd->full_cmd_path = strdup(conc_path);
 			free(conc_path);
-			_cmd->status_code = SYS_CMD_FOUND;
-			return;
+			return (SYS_CMD_FOUND);
 		}
 		free(conc_path);
 		i++;
 	}
-	_cmd->status_code = SYS_CMD_NOTFOUND;
+	return (SYS_CMD_NOTFOUND);
 }

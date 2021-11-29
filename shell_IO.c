@@ -49,7 +49,7 @@ void print_prompt()
 	if (prompt == NULL)
 	{
 		printf("Error allocating memory in buffer - current directoy\n");
-		exit(EXIT_CODE);
+		exit(EXIT_STATUS);
 	}
 	memset(prompt, 0, tot_len);
 
@@ -57,10 +57,7 @@ void print_prompt()
 	
 	count = write(STDOUT_FILENO, prompt, strlen(buff));
 	if (count == -1)
-	{
 		printf("error trying to write prompt\n");
-		exit(EXIT_CODE);
-	}
 
 	free(buff);
 	free(newBuff);
@@ -78,13 +75,9 @@ void read_command(struct command *_cmd)
 	size_t len = 0;
 	ssize_t nread = 0;
 
-	_cmd->input = NULL;
-	nread = getline(&_cmd->input, &len, stdin);
-	if (nread == -1)
-	{
-		mem_mgmt(_cmd);
-		exit_shell(_cmd);
-	}
+	fflush(stdin);
+	nread = getline(&(_cmd->input), &len, stdin);
+	fflush(stdin);
 
 	/* replacing new line char with nulll */
 	while (_cmd->input[i])

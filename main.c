@@ -8,6 +8,7 @@ int main(int argc, char **argv, char **envir)
 {
 	cmd _cmd;
 	void (*b_cmd)(struct command * _cmd);
+	int status = 0;
 
 	(void)argc;
 	(void)argv;
@@ -16,9 +17,15 @@ int main(int argc, char **argv, char **envir)
 	/* Init main struct */
 	init_cmd(&_cmd, envir);
 
+	if (!isatty(fileno(stdin)))
+		_cmd.status_code = NOT_FROM_TERMINAL;
+
 	/* init shell program - display welcoming mssg and authors */
-	init_shell();
-	print_prompt();
+	if (_cmd.status_code == BASE_STATUS)
+	{
+		init_shell();
+		print_prompt();
+	}
 
 	/* set PATH into tokens */
 	parse_path(&_cmd);
@@ -28,10 +35,10 @@ int main(int argc, char **argv, char **envir)
 
 		/* Gets input from user and sets size of chars readed */
 		read_command(&_cmd);
-
 		if (_cmd.size > 0)
 		{
 			/* Store Input in History File */
+			/* TODO */
 
 			/* Parse Input into cmd - using space as delimiter */
 			parse_input(&_cmd);
@@ -49,19 +56,9 @@ int main(int argc, char **argv, char **envir)
 			}
 		}
 
-		if (_cmd.status_code == SYS_CMD_NOTFOUND)
-		{
-			write(STDOUT_FILENO, "Command not found!\n", 20);
-		}
-
-		if (_cmd.status_code == -1)
-		{
-			mem_mgmt(&_cmd);
-			write(STDOUT_FILENO, "Good Bye!\n", 11);
-			sleep(1);
-			clear(void);
+		status = handle_status_codes(&_cmd);
+		if (status == EXIT_STATUS)
 			return (0);
-		}
 
 		/* Print shell desc + USERNAME */
 		print_prompt();

@@ -35,8 +35,8 @@ void sys_cmd_exec(struct command *_cmd)
 		return;
 
 	/* find path */
-	get_cmd_path(_cmd);
-	if (_cmd->status_code == SYS_CMD_FOUND)	
+	status = get_cmd_path(_cmd);
+	if (status == SYS_CMD_FOUND)	
 	{
 		child_pid = fork();
 		if (child_pid == -1)

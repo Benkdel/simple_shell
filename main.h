@@ -22,18 +22,14 @@
 #define MAXCMDSIZE 1024
 
 /* STATUS CODES - TODO */
-#define SUCCESS_CODE 0
-#define EXIT_CODE -1
+#define BASE_STATUS 0
+#define EXIT_STATUS -1
 #define SYS_CMD_FOUND 2
 #define SYS_CMD_NOTFOUND -2
 #define FORK_FAILED -3
+#define NOT_FROM_TERMINAL -4
 
 /* Flags */
-#define PIPE_OP "pipe"
-
-/* CMD - PATH ids within structures */
-#define cmd_CMD 0
-#define cmd_PATH 1
 
 /* structures */
 
@@ -100,9 +96,12 @@ void free_array(char **array);
 void parse_input(struct command *_cmd);
 char *_getenv(char *local_cmd);
 void parse_path(struct command *_cmd);
-void get_cmd_path(struct command *_cmd);
+int get_cmd_path(struct command *_cmd);
 
 /* _concat.c */
 char *_concat(size_t num_of_buffers, const char * const format, ...);
+
+/* handle_flags.c */
+int handle_status_codes(struct command *_cmd);
 
 #endif
