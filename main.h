@@ -12,14 +12,18 @@
 #include <sys/stat.h>
 
 /* General Macros */
-#define clear(void) write(STDOUT_FILENO, " \033[1;1H\033[2J", 14)
+#define clear(void) write(STDOUT_FILENO, " \033[1;1H\033[2J", 12)
 #define MAXCMDSIZE 1024
 
-/* Flags - TODO */
+/* STATUS CODES - TODO */
+#define SUCCESS_CODE 0
 #define EXIT_CODE -1
-#define PIPE_OP "pipe"
+#define SYS_CMD_FOUND 2
 #define SYS_CMD_NOTFOUND -2
 #define FORK_FAILED -3
+
+/* Flags */
+#define PIPE_OP "pipe"
 
 /* CMD - PATH ids within structures */
 #define cmd_CMD 0
@@ -43,6 +47,7 @@ typedef struct command
 	char *input;
 	char *full_cmd_path;
 	ssize_t size;
+	int status_code;
 	int flags;
 } cmd;
 

@@ -38,7 +38,7 @@ int main(int argc, char **argv, char **envir)
 
 			/* Parse Input into cmd - using space as delimiter */
 			parse_input(&_cmd);
-
+		
 			/* get built in function if applicable */
 			b_cmd = get_builtin_cmd(_cmd.cmd[0]);
 			if (b_cmd != NULL)
@@ -52,10 +52,10 @@ int main(int argc, char **argv, char **envir)
 			}
 		}
 
-		if (_cmd.flags == SYS_CMD_NOTFOUND)
+		if (_cmd.status_code == SYS_CMD_NOTFOUND)
 			printf("Command not found!\n");
 
-		if (_cmd.flags == -1)
+		if (_cmd.status_code == -1)
 		{
 			/* mem_mgmt(&_cmd); */
 			printf("Good Bye!\n");

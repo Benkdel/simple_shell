@@ -18,7 +18,7 @@ void parse_input(struct command *_cmd)
 		currToken = strtok(_input, " ");
 		_cmd->cmd[i] = currToken;
 		_input = NULL;
-		i++;
+		i++; 
 	} while (currToken != NULL);
 }
 
@@ -73,7 +73,7 @@ void get_cmd_path(struct command *_cmd)
 
 		if (conc_path == NULL)
 		{
-			_cmd->flags = - 1;
+			_cmd->status_code = EXIT_CODE;
 			return;
 		}
 
@@ -87,10 +87,11 @@ void get_cmd_path(struct command *_cmd)
 		{
 			_cmd->full_cmd_path = strdup(conc_path);
 			free(conc_path);
-			_cmd->flags = 0;
+			_cmd->status_code = SYS_CMD_FOUND;
 			return;
 		}
 		free(conc_path);
 		i++;
 	}
+	_cmd->status_code = SYS_CMD_NOTFOUND;
 }

@@ -47,6 +47,7 @@ void init_cmd(struct command *_cmd)
 	_cmd->path = malloc(sizeof(char) * MAXCMDSIZE);
 	_cmd->input = NULL;
 	_cmd->full_cmd_path = NULL;
+	_cmd->status_code = SUCCESS_CODE;
 	_cmd->flags = 0;
 	_cmd->size = 0;
 

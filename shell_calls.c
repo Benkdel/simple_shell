@@ -33,22 +33,24 @@ void sys_cmd_exec(struct command *_cmd)
 	if (_cmd->cmd == NULL)
 		return;
 
-	child_pid = fork();
-	if (child_pid == -1)
+	/* find path */
+	get_cmd_path(_cmd);
+	if (_cmd->status_code == SYS_CMD_FOUND)	
 	{
-		printf("ERROR::fAILED TO CREATE CHILD PROCESS\n");
-		status = FORK_FAILED;
-		return;
+		child_pid = fork();
+		if (child_pid == -1)
+		{
+			printf("ERROR::fAILED TO CREATE CHILD PROCESS\n");
+			_cmd->status_code = FORK_FAILED;
+			return;
+		}
+		if (child_pid == 0)
+		{
+			execve(_cmd->full_cmd_path, _cmd->cmd, _cmd->env_list);
+		}
+		else
+		{
+			wait(&status);
+		}
 	}
-	if (child_pid == 0)
-	{
-		/* find path */
-		get_cmd_path(_cmd);
-		execve(_cmd->full_cmd_path, &_cmd->cmd[1], _cmd->env_list);
-	}
-	else
-	{
-		wait(&status);
-	}
-	_cmd->flags = status;
 }

@@ -18,7 +18,7 @@ void print_dir()
  */
 void exit_shell(struct command *_cmd)
 {
-	_cmd->flags = -1;
+	_cmd->status_code = EXIT_CODE;
 }
 
 /**
