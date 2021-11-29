@@ -54,4 +54,9 @@ void sys_cmd_exec(struct command *_cmd)
 			wait(&status);
 		}
 	}
+	else
+	{
+		if (_cmd->status_code == BASE_STATUS)
+			_cmd->status_code = SYS_CMD_NOTFOUND;
+	}
 }

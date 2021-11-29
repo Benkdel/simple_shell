@@ -104,4 +104,8 @@ char *_concat(size_t num_of_buffers, const char * const format, ...);
 /* handle_flags.c */
 int handle_status_codes(struct command *_cmd);
 
+/* signals_handler.c */
+void _sigint();
+
+
 #endif

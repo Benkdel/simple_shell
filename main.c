@@ -33,6 +33,8 @@ int main(int argc, char **argv, char **envir)
 	while (1)
 	{
 
+		signal(SIGINT, _sigint);
+
 		/* Gets input from user and sets size of chars readed */
 		read_command(&_cmd);
 		if (_cmd.size > 0)

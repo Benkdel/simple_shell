@@ -75,9 +75,12 @@ void read_command(struct command *_cmd)
 	size_t len = 0;
 	ssize_t nread = 0;
 
-	fflush(stdin);
 	nread = getline(&(_cmd->input), &len, stdin);
-	fflush(stdin);
+	if (nread == EOF)
+	{
+		_cmd->status_code = EXIT_STATUS;
+		return;
+	}
 
 	/* replacing new line char with nulll */
 	while (_cmd->input[i])
