@@ -31,7 +31,10 @@ char *_concat(size_t num_of_buffers, const char *const format, ...)
 
 	concat_buffer = malloc(sizeof(char) * (total_len + 1));
 	if (concat_buffer == NULL)
+	{
+		free(buffer);
 		return (NULL);
+	}
 	memset(concat_buffer, 0, total_len + 1);
 
 	for (j = 0, i = 0; total_len > 0; j++)

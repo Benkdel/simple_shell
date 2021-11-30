@@ -21,7 +21,7 @@ void parse_input(struct command *_cmd)
 
 	do
 	{
-		currToken = strtok(_input, " ");
+		currToken = strtok(_input, " \n");
 		_cmd->cmd[i] = currToken;
 		_input = NULL;
 		i++;
@@ -51,7 +51,7 @@ void parse_path(struct command *_cmd)
 
 	do
 	{
-		currToken = strtok(path_str, ":");
+		currToken = strtok(path_str, ":\n");
 		_cmd->path[i] = currToken;
 		path_str = NULL;
 		i++;

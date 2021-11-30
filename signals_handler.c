@@ -6,7 +6,6 @@
  */
 void _sigint()
 {
-	fflush(stdin);
-	clear();
+	write(STDOUT_FILENO, "\n", 2);
 	print_prompt();
 }

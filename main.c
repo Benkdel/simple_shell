@@ -37,7 +37,7 @@ int main(int argc, char **argv, char **envir)
 
 		/* Gets input from user and sets size of chars readed */
 		read_command(&_cmd);
-		if (_cmd.size > 0)
+		if (_cmd.size > 1)
 		{
 			/* Store Input in History File */
 			/* TODO */
@@ -57,7 +57,7 @@ int main(int argc, char **argv, char **envir)
 				sys_cmd_exec(&_cmd);
 			}
 		}
-
+		_cmd.size = 0;
 		status = handle_status_codes(&_cmd);
 		if (status == EXIT_STATUS)
 			return (0);

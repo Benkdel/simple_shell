@@ -27,7 +27,8 @@ void print_prompt()
 	if (prompt == NULL)
 		exit(EXIT_STATUS);
 	memset(prompt, 0, tot_len);
-	prompt = _concat(3, "[shell-v0.1]", buff, "$ ");
+
+	prompt = _concat(6, GREEN, "[shell-v0.1]", LIGHT_BLUE, buff, "$ ", BROWN);
 
 	/* write prompt to the screen */
 	count = write(STDOUT_FILENO, prompt, strlen(prompt));
@@ -45,7 +46,6 @@ void print_prompt()
  */
 void read_command(struct command *_cmd)
 {
-	int i = 0;
 	size_t len = 0;
 	ssize_t nread = 0;
 
@@ -54,14 +54,6 @@ void read_command(struct command *_cmd)
 	{
 		_cmd->status_code = EXIT_STATUS;
 		return;
-	}
-
-	/* replacing new line char with nulll */
-	while (_cmd->input[i])
-	{
-		if (_cmd->input[i] == '\n')
-			_cmd->input[i] = '\0';
-		i++;
 	}
 	_cmd->size += nread;
 }

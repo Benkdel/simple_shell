@@ -11,13 +11,13 @@ void init_shell()
 	clear();
 	printf("\n\n******************"
 	       "************************");
-	printf("\n\t****Shell Project****");
-	printf("\n\n\t> Authors:");
-	printf("\n\t\t- Humberto Tejada");
-	printf("\n\t\t- Carlos Bentin");
+	printf("\n\t****\033[0;32mShell Project****");
+	printf("\n\n\t> \033[1;34mAuthors:");
+	printf("\n\t\t- \033[1;37mHumberto Tejada");
+	printf("\n\t\t- \033[1;37mCarlos Bentin");
 	printf("\n\n\n*******************"
 	       "***********************");
-	printf("\n\n\nCURRENT USER: @%s\n", user_name);
+	printf("\n\n\n\033[0;32mCURRENT USER: @%s\n", user_name);
 	
 }
 
