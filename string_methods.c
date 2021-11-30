@@ -44,3 +44,46 @@ char *_concat(size_t num_of_buffers, const char *const format, ...)
 	free(buffer);
 	return (concat_buffer);
 }
+
+/**
+ * str_replace - replaces a string with another one
+ * @buffer: buffer with the string
+ * @old: str to be replacecd
+ * @new: new str
+ * @fpos: starting position old str, starting at index 0
+ * Return: pointer to char * buffer
+ */
+char *str_replace(char *buffer, char *old_s, char *new_s, size_t fpos)
+{
+	size_t i, j, k;
+	size_t len_old, len_new, len_total;
+	char *temp;
+
+	len_old = strlen(old_s);
+	len_new = strlen(new_s);
+	len_total = strlen(buffer) - len_old + len_new;
+
+	/* assign memory for remaining buffer */
+	temp = malloc(sizeof(char) * len_total);
+	if (temp == NULL)
+		return (NULL);
+
+	for (i = 0, j = 0; buffer[i]; i++)
+	{
+		if (i < fpos || i > (fpos + len_old - 1))
+		{
+			temp[j] = buffer[i];
+			j++;
+		}
+		if (i == fpos)
+		{
+			for (k = 0; new_s[k]; k++)
+			{
+				temp[j] = new_s[k];
+				j++;
+			}
+			i += len_old - 1;
+		}
+	}
+	return (temp);
+}

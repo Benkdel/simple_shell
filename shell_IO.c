@@ -6,61 +6,35 @@
  */
 void print_prompt()
 {
-	char *buff, *newBuff, *prompt;
-	size_t len_homeDir = 0, i = 0, j = 0, tot_len = 0;
+	char *buff, *prompt, *home;
+	size_t tot_len = 0;
 	ssize_t count = 0;
 
 	/* get current directory */
 	buff = malloc(sizeof(char) * 100);
 	if (buff == NULL)
-	{
-		printf("Error allocating memory in buffer - current directoy\n");
-		exit(-1);
-	}
+		exit(EXIT_STATUS);
 	getcwd(buff, 100);
 	buff[strlen(buff) - 1] = '\0';
 
 	/* replace home dir with ~ */
-	len_homeDir = strlen(getenv("HOME"));
-	tot_len = strlen(buff) - len_homeDir + 2;
+	home = getenv("HOME");
+	buff = str_replace(buff, home, "~", 0);
 
-	newBuff = malloc(sizeof(char) * tot_len);
-	if (newBuff == NULL)
-	{
-		printf("Error allocating memory in buffer - replacing with ~\n");
-		exit(-1);
-	}
-	memset(newBuff, 0, tot_len);
-	newBuff[0] = '~';
-	newBuff[1] = '/';
-	j = 2;
-	while (buff[i])
-	{
-		if (i > len_homeDir)
-		{
-			newBuff[j] = buff[i];
-			j++;
-		}
-		i++;
-	}
-
-	tot_len += 14;
+	/* concatenate prompt message */
+	tot_len = 13 + strlen(buff) + 3;
 	prompt = malloc(sizeof(char) * tot_len);
 	if (prompt == NULL)
-	{
-		printf("Error allocating memory in buffer - current directoy\n");
 		exit(EXIT_STATUS);
-	}
 	memset(prompt, 0, tot_len);
+	prompt = _concat(3, "[shell-v0.1]", buff, "$ ");
 
-	prompt = _concat(3, "[shell-v0.1]", newBuff, "$ ");
-	
-	count = write(STDOUT_FILENO, prompt, strlen(buff));
+	/* write prompt to the screen */
+	count = write(STDOUT_FILENO, prompt, strlen(prompt));
 	if (count == -1)
-		printf("error trying to write prompt\n");
+		exit(EXIT_STATUS);
 
 	free(buff);
-	free(newBuff);
 	free(prompt);
 }
 

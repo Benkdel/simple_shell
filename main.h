@@ -92,14 +92,17 @@ void check_overflow(struct command *_cmd, unsigned int new_bytes);
 void init_cmd(struct command *_cmd, char **envir);
 void free_array(char **array);
 
-/* shell_str_helpers */
+/* shell_str_parsing */
 void parse_input(struct command *_cmd);
 char *_getenv(char *local_cmd);
 void parse_path(struct command *_cmd);
-int get_cmd_path(struct command *_cmd);
 
-/* _concat.c */
+/* string_methods.c */
+char *str_replace(char *buffer, char *old_s, char *new_s, size_t fpos);
 char *_concat(size_t num_of_buffers, const char * const format, ...);
+
+/* get_cmd_path */
+int get_cmd_path(struct command *_cmd);
 
 /* handle_flags.c */
 int handle_status_codes(struct command *_cmd);
