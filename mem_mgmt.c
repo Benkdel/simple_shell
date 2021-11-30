@@ -17,6 +17,24 @@ void mem_mgmt(struct command *_cmd)
 }
 
 /**
+ * reset_memory - function to reset buffers on each read command 
+ * @cmd: main data struct
+ * Return: none - void function
+ */
+void reset_memory(struct command *_cmd)
+{
+	/* RESET CMD and INPUT */
+	if (_cmd->cmd != NULL)
+		free(_cmd->cmd);
+	if (_cmd->input != NULL)
+		free(_cmd->input);
+
+	/* INIT CMD AND INPUT */
+	_cmd->cmd = malloc(sizeof(char *) * MAXCMDSIZE);
+	_cmd->input = NULL;
+}
+
+/**
  * check_overflow - checks if newSize is bigger than current MAX
  * adds space if necessary
  * @m_buffer: main buffer string

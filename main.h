@@ -86,6 +86,7 @@ void clear_screen(struct command *_cmd);
 /* mem_mgmt.c */
 void init_cmd(struct command *_cmd, char **envir);
 void mem_mgmt(struct command *_cmd);
+void reset_memory(struct command *_cmd);
 void check_overflow(struct command *_cmd, unsigned int new_bytes);
 
 /* shell_str_parsing */

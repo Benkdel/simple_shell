@@ -9,16 +9,10 @@
  */
 void parse_input(struct command *_cmd)
 {
-	char *_input = strdup(_cmd->input);
-	char *currToken;
+	char *currToken, *_input;
 	int i = 0;
 
-	if (_input == NULL)
-	{
-		printf("Error allocating memory\n");
-		mem_mgmt(_cmd);
-	}
-
+	_input = strdup(_cmd->input);
 	do
 	{
 		currToken = strtok(_input, " \n");
@@ -26,17 +20,7 @@ void parse_input(struct command *_cmd)
 		_input = NULL;
 		i++;
 	} while (currToken != NULL);
-	free(_input);
-}
-
-/**
- * _getenv - get env variable from path
- * @local_cmd: local cmd
- * Return: pointer to result if found. Ow, NULL
- */
-char *_getenv(char *local_cmd)
-{
-	return (getenv(local_cmd));
+	free((char*)_input);
 }
 
 /**
@@ -58,3 +42,12 @@ void parse_path(struct command *_cmd)
 	} while (currToken != NULL);
 }
 
+/**
+ * _getenv - get env variable from path
+ * @local_cmd: local cmd
+ * Return: pointer to result if found. Ow, NULL
+ */
+char *_getenv(char *local_cmd)
+{
+	return (getenv(local_cmd));
+}

@@ -14,6 +14,7 @@ int handle_status_codes(struct command *_cmd)
 	case EXIT_STATUS:
 		mem_mgmt(_cmd);
 		write(STDOUT_FILENO, "Good Bye!\n", 11);
+		fflush(stdin);
 		sleep(1);
 		clear(void);
 		status = EXIT_STATUS;

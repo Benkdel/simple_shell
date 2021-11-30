@@ -17,25 +17,28 @@ char *_concat(size_t num_of_buffers, const char *const format, ...)
 
 	buffer = malloc(sizeof(char *) * num_of_buffers);
 	if (buffer == NULL)
+	{
+		va_end(args);
 		return (NULL);
+	}
 	memset(buffer, 0, num_of_buffers);
 
-	buffer[0] = strdup(format);
+	buffer[0] = (char *)format;
 	total_len = strlen(buffer[0]);
-
 	for (i = 1; i < (int)num_of_buffers; i++)
 	{
 		buffer[i] = va_arg(args, char *);
 		total_len += strlen(buffer[i]);
 	}
 
-	concat_buffer = malloc(sizeof(char) * (total_len + 1));
+	concat_buffer = malloc(sizeof(char) * (total_len + 2));
 	if (concat_buffer == NULL)
 	{
-		free(buffer);
+		free(*buffer);
+		va_end(args);
 		return (NULL);
 	}
-	memset(concat_buffer, 0, total_len + 1);
+	memset(concat_buffer, 0, total_len + 2);
 
 	for (j = 0, i = 0; total_len > 0; j++)
 	{
@@ -69,7 +72,11 @@ char *str_replace(char *buffer, char *old_s, char *new_s, size_t fpos)
 	/* assign memory for remaining buffer */
 	temp = malloc(sizeof(char) * len_total);
 	if (temp == NULL)
+	{
+		free(buffer);
 		return (NULL);
+	}
+	temp[strlen(temp) - 1] = '\0';
 
 	for (i = 0, j = 0; buffer[i]; i++)
 	{
