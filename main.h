@@ -66,36 +66,32 @@ typedef struct builtin_cmd
 	void (*b_function)(struct command *);
 } b_cmd;
 
-/* main file - myshell.c*/
-int my_shell();
-
 /* shell_calls.c */
 void init_shell();
 void sys_cmd_exec(struct command *_cmd);
 
 /* shell_IO.c */
-void read_command(struct command *);
+void read_command(struct command *_cmd);
 void print_prompt();
-void show_prev_cmd(struct command *);
+void show_prev_cmd(struct command *_cmd);
+
+/* get_builtin_cmd.c */
+void (*get_builtin_cmd(const char *key))(struct command *_cmd);
 
 /* built_ins.c */
-void exit_shell(struct command *);
+void exit_shell(struct command *_cmd);
 void ppath(struct command *_cmd);
 void clear_screen(struct command *_cmd);
 
-/* get_builtin_cmd.c */
-void (*get_builtin_cmd(const char *key))(struct command *);
-
 /* mem_mgmt.c */
-void mem_mgmt(struct command *);
-void check_overflow(struct command *_cmd, unsigned int new_bytes);
 void init_cmd(struct command *_cmd, char **envir);
-void free_array(char **array);
+void mem_mgmt(struct command *_cmd);
+void check_overflow(struct command *_cmd, unsigned int new_bytes);
 
 /* shell_str_parsing */
 void parse_input(struct command *_cmd);
-char *_getenv(char *local_cmd);
 void parse_path(struct command *_cmd);
+char *_getenv(char *local_cmd);
 
 /* string_methods.c */
 char *str_replace(char *buffer, char *old_s, char *new_s, size_t fpos);
