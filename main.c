@@ -37,6 +37,13 @@ int main(int argc, char **argv, char **envir)
 
 		/* Gets input from user and sets size of chars readed */
 		read_command(&_cmd);
+		if (_cmd.status_code == EXIT_STATUS)
+		{
+			free(_cmd.path);
+			free(_cmd.input);
+			clear(void);
+			return (-1);
+		}
 		if (_cmd.size > 1)
 		{
 			_cmd.lines_counter++;
