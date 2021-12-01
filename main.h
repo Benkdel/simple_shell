@@ -16,7 +16,6 @@
 
 #include <stdarg.h>
 
-
 /* General Macros */
 #define clear(void) write(STDOUT_FILENO, " \033[1;1H\033[2J", 12)
 #define MAXCMDSIZE 1024
@@ -27,7 +26,10 @@
 #define SYS_CMD_FOUND 2
 #define SYS_CMD_NOTFOUND -2
 #define FORK_FAILED -3
-#define NOT_FROM_TERMINAL -4
+
+/* INPUT TYPE */
+#define F_TERMINAL 0
+#define F_NOT_TERMINAL 1
 
 /* Flags */
 
@@ -49,6 +51,8 @@ typedef struct command
 	char *input;
 	char *full_cmd_path;
 	int status_code;
+	int input_type;
+	int lines_counter;
 	int flags;
 	ssize_t size;
 } cmd;
@@ -102,7 +106,7 @@ size_t get_occurrences(char c, char *str);
 int get_cmd_path(struct command *_cmd);
 
 /* handle_flags.c */
-int handle_status_codes(struct command *_cmd);
+int handle_status_codes(struct command *_cmd, char *main_file, char *temp_input);
 
 /* signals_handler.c */
 void _sigint();

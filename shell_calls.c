@@ -18,7 +18,6 @@ void init_shell()
 	printf("\n\n\n*******************"
 	       "***********************");
 	printf("\n\n\n\033[0;32mCURRENT USER: @%s\n", user_name);
-	
 }
 
 /**
