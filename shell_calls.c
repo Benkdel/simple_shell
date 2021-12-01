@@ -48,6 +48,7 @@ void sys_cmd_exec(struct command *_cmd)
 		if (child_pid == 0)
 		{
 			execve(_cmd->full_cmd_path, _cmd->cmd, _cmd->env_list);
+			free(_cmd->full_cmd_path);
 		}
 		else
 		{

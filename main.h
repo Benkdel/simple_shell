@@ -71,6 +71,7 @@ void init_shell();
 void sys_cmd_exec(struct command *_cmd);
 
 /* shell_IO.c */
+char *get_cwd();
 void read_command(struct command *_cmd);
 void print_prompt();
 void show_prev_cmd(struct command *_cmd);
@@ -85,18 +86,17 @@ void clear_screen(struct command *_cmd);
 
 /* mem_mgmt.c */
 void init_cmd(struct command *_cmd, char **envir);
-void mem_mgmt(struct command *_cmd);
-void reset_memory(struct command *_cmd);
-void check_overflow(struct command *_cmd, unsigned int new_bytes);
 
 /* shell_str_parsing */
 void parse_input(struct command *_cmd);
+char **parse_str(char *str, char *del);
 void parse_path(struct command *_cmd);
 char *_getenv(char *local_cmd);
 
 /* string_methods.c */
 char *str_replace(char *buffer, char *old_s, char *new_s, size_t fpos);
 char *_concat(size_t num_of_buffers, const char * const format, ...);
+size_t get_occurrences(char c, char *str);
 
 /* get_cmd_path */
 int get_cmd_path(struct command *_cmd);

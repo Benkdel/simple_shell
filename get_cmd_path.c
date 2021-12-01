@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * get_cmd_path - gets path of command in envi
+ * get_cmd_path - gets path of command in envi b                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
  * @_cmd: main data struct
  * Return: 2 if succeded, -2 if failed
  */
@@ -24,7 +24,6 @@ int get_cmd_path(struct command *_cmd)
 	while (path[i])
 	{
 		conc_path = _concat(3, path[i], "/", _cmd->cmd[0]);
-
 		f_stat = stat(conc_path, &_stat);
 		if (f_stat == 0)
 		{

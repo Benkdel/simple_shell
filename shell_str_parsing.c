@@ -2,44 +2,33 @@
 
 /**
  * parse_input - parse input from user and store it in buffer
- * @cmd: main data struct
- * @delimiter: delimiter
- * @dest: parse into CMD or PATH
- * Return: none - void function
+ * @str: string to parse
+ * @del: delimiter
+ * Return: double pointer - void function
  */
-void parse_input(struct command *_cmd)
+char **parse_str(char *str, char *del)
 {
-	char *currToken, *_input;
-	int i = 0;
+	char *str1, *token;
+        char **parsed;
+	size_t size, j;
 
-	_input = strdup(_cmd->input);
-	do
-	{
-		currToken = strtok(_input, " \n");
-		_cmd->cmd[i] = currToken;
-		_input = NULL;
-		i++;
-	} while (currToken != NULL);
-	free((char*)_input);
-}
+	size = get_occurrences(del[0], str) + 1;
+	parsed = (char **)malloc(sizeof(char *) * size);
+	for(j = 0; j < size; j++)
+		parsed[j] = NULL;
+	
+	if (parsed == NULL)
+		return (NULL);
 
-/**
- * parse_path - set up path in main data struct
- * @_cmd: main data struct
- */
-void parse_path(struct command *_cmd)
-{
-	int i = 0;
-	char *currToken;
-	char *path_str = _getenv("PATH");
+        for (j = 0, str1 = str; ; j++, str1 = NULL)
+        {
+                token = strtok(str1, del);
+                if (token == NULL)
+                        break;
+                parsed[j] = token;
+        }
 
-	do
-	{
-		currToken = strtok(path_str, ":\n");
-		_cmd->path[i] = currToken;
-		path_str = NULL;
-		i++;
-	} while (currToken != NULL);
+	return (parsed);
 }
 
 /**

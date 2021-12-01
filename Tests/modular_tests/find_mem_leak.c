@@ -10,7 +10,7 @@
 #include <stdarg.h>
 
 
-typedef struct command
+typedef struct command_2
 {
 	char **cmd;
 	char **env_list;
@@ -20,13 +20,13 @@ typedef struct command
 	int status_code;
 	int flags;
 	ssize_t size;
-} cmd;
+} cmd_2;
 
  /** read_command - function to take input
  * @_cmd: command structure
  * Return: none - void function
  */
-void read_command(struct command *_cmd)
+void read_command_2(struct command_2 *_cmd)
 {
 	size_t len = 0;
 	ssize_t nread = 0;
@@ -42,12 +42,12 @@ void read_command(struct command *_cmd)
 }
 
 /**
- * get_occurrences - counts number of occurrences of a char
+ * get_occurrences_2 - counts number of occurrences of a char
  * @c: char to look for
  * @str: string to look in
  * Return: size_t times
  */
-size_t get_occurrences(char c, char *str)
+size_t get_occurrences_2(char c, char *str)
 {
 	size_t len = 1, i;
 
@@ -60,18 +60,18 @@ size_t get_occurrences(char c, char *str)
 }
 
 /**
- * parse_input - parse input from user and store it in buffer
+ * parse_input_2 - parse input from user and store it in buffer
  * @str: string to parse
  * @del: delimiter
  * Return: double pointer - void function
  */
-char **parse_input(char *str, char *del)
+char **parse_input_2(char *str, char *del)
 {
 	char *str1, *token;
         char **parsed;
 	size_t size, j;
 
-	size = get_occurrences(' ', str) + 1;
+	size = get_occurrences_2(del[0], str) + 1;
 	parsed = (char **)malloc(sizeof(char *) * size);
 	for(j = 0; j < size; j++)
 		parsed[j] = NULL;
@@ -97,24 +97,25 @@ char **parse_input(char *str, char *del)
  */
 int main(void)
 {
-	cmd _cmd;
+	cmd_2 _cmd;
 	int i;
 	char *temp;
 
 	while (1)
 	{
-		read_command(&_cmd);
+		read_command_2(&_cmd);
 		temp = malloc(sizeof(char) * (_cmd.size + 1));
 		memset(temp, 0, _cmd.size + 1);
 
 		temp = strncpy(temp, _cmd.input, _cmd.size);
 		temp[strlen(temp) - 1] = '\0';
-		_cmd.cmd = parse_input(temp, " \n");
+		_cmd.cmd = parse_input_2(temp, " \n");
 		
 		if (strncmp(_cmd.cmd[0], "exit", 4) == 0)
 		{
 			free(_cmd.cmd);
 			free(_cmd.input);
+			free(temp);
 			return (0);
 		}
 		printf("%s", _cmd.input);

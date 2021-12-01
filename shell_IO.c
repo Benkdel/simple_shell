@@ -1,43 +1,60 @@
 #include "main.h"
 
 /**
+ * get_cwd - get current directory
+ * Return: string with current directory
+ */
+char *get_cwd()
+{
+	char buff[512];
+	char *cwd;
+	size_t n = 0;
+	int i = 0;
+
+	getcwd(buff, 512);
+	n = strlen(buff);
+	cwd = malloc(sizeof(char) * (n + 1));
+	if (cwd == NULL)
+		return (NULL);
+	while (i < (int)n)
+	{
+		cwd[i] = buff[i];
+		i++;
+	}
+	return (cwd);
+}
+
+/**
+ * print_prompt - prints desc + username
+ * Return: none - void function
+ */
+void print_prompt_2()
+{
+	char *cwd, *prompt, *home;
+
+	/* get current directory */
+	cwd = get_cwd();
+        if (cwd == NULL)
+		return;
+	/* replace home dir with ~ */
+	home = getenv("HOME");
+	cwd = str_replace(cwd, home, "~", 0);
+	cwd[strlen(cwd) - 1] = '\0';
+
+	/* concatenate prompt message */
+	prompt = _concat(6, GREEN, "[shell-v0.1]", LIGHT_BLUE, cwd, "$ ", BROWN);
+	write(STDOUT_FILENO, prompt, strlen(prompt));
+	free(cwd);
+	free(prompt);
+}
+
+/**
  * print_prompt - prints desc + username
  * Return: none - void function
  */
 void print_prompt()
-{
-	/*char *buff, *prompt, *home;
-	size_t tot_len = 0;
-	ssize_t count = 0;*/
-
-	/* get current directory */
-	/*buff = malloc(sizeof(char) * 100);
-	if (buff == NULL)
-		exit(EXIT_STATUS);
-	buff[strlen(buff) - 1] = '\0';
-	getcwd(buff, 100);
-	*/
-	/* replace home dir with ~ */
-	/*home = getenv("HOME");
-	buff = str_replace(buff, home, "~", 0);*/
-
-	/* concatenate prompt message */
-	/*tot_len = 13 + strlen(buff) + 3;
-	prompt = malloc(sizeof(char) * tot_len);
-	if (prompt == NULL)
-		exit(EXIT_STATUS);
-	prompt[strlen(prompt) - 1] = '\0';
-
-	memset(prompt, 0, tot_len - 1);
-	prompt = _concat(6, GREEN, "[shell-v0.1]", LIGHT_BLUE, buff, "$ ", BROWN);
-	free(buff); */
-	/* write prompt to the screen */
-	/*count = write(STDOUT_FILENO, prompt, strlen(prompt));
-	fflush(stdin);
-	if (count == -1)
-		exit(EXIT_STATUS);
-	free(prompt);*/
-	write(STDOUT_FILENO, "$ ", 3);
+{	
+	write(STDOUT_FILENO, "\033[0;32mShell-$ \033[0;33m", 23);
 }
 
 /**
@@ -56,7 +73,7 @@ void read_command(struct command *_cmd)
 		_cmd->status_code = EXIT_STATUS;
 	}
 	_cmd->input[nread - 1] = '\0';
-	_cmd->size += nread;
+	_cmd->size = nread;
 }
 
 /**

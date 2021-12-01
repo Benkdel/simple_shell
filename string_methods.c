@@ -17,29 +17,26 @@ char *_concat(size_t num_of_buffers, const char *const format, ...)
 
 	buffer = malloc(sizeof(char *) * num_of_buffers);
 	if (buffer == NULL)
-	{
-		va_end(args);
 		return (NULL);
-	}
-	memset(buffer, 0, num_of_buffers);
+	for(i = 0; i < (int)num_of_buffers; i++)
+		buffer[i] = NULL;
 
 	buffer[0] = (char *)format;
 	total_len = strlen(buffer[0]);
+
 	for (i = 1; i < (int)num_of_buffers; i++)
 	{
 		buffer[i] = va_arg(args, char *);
 		total_len += strlen(buffer[i]);
 	}
 
-	concat_buffer = malloc(sizeof(char) * (total_len + 2));
+	concat_buffer = malloc(sizeof(char) * (total_len + 1));
 	if (concat_buffer == NULL)
 	{
-		free(*buffer);
-		va_end(args);
+		free(buffer);
 		return (NULL);
 	}
-	memset(concat_buffer, 0, total_len + 2);
-
+	concat_buffer[total_len] = '\0';
 	for (j = 0, i = 0; total_len > 0; j++)
 	{
 		for (x = 0; buffer[j][x]; x++, i++)
@@ -96,4 +93,22 @@ char *str_replace(char *buffer, char *old_s, char *new_s, size_t fpos)
 		}
 	}
 	return (temp);
+}
+
+/**
+ * get_occurrences - counts number of occurrences of a char
+ * @c: char to look for
+ * @str: string to look in
+ * Return: size_t times
+ */
+size_t get_occurrences(char c, char *str)
+{
+	size_t len = 1, i;
+
+	for (i = 1; str[i]; i++)
+	{
+		if (str[i] == c)
+			len++;
+	}
+	return (len);
 }
