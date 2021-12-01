@@ -20,6 +20,9 @@
 #define clear(void) write(STDOUT_FILENO, " \033[1;1H\033[2J", 12)
 #define MAXCMDSIZE 1024
 
+#define DEBUG_MODE 1
+  
+
 /* STATUS CODES - TODO */
 #define BASE_STATUS 0
 #define EXIT_STATUS -1
@@ -129,5 +132,9 @@ void _sigint();
 #define CYAN "\033[0;36m"
 #define LIGHT_CYAN "\033[1;36"
 #define WHITE "\033[1;37m"
+
+
+/* ===== DEBUG ========= */
+
 
 #endif

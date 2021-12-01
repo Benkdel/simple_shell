@@ -34,14 +34,14 @@ int main(int argc, char **argv, char **envir)
 	while (1)
 	{
 		signal(SIGINT, _sigint);
-
 		/* Gets input from user and sets size of chars readed */
 		read_command(&_cmd);
 		if (_cmd.status_code == EXIT_STATUS)
 		{
 			free(_cmd.path);
 			free(_cmd.input);
-			clear(void);
+			if (_cmd.input_type == F_TERMINAL)
+				clear(void);
 			return (-1);
 		}
 		if (_cmd.size > 1)
@@ -53,7 +53,7 @@ int main(int argc, char **argv, char **envir)
 			temp_input = strncpy(temp_input, _cmd.input, _cmd.size + 1);
 			temp_input[strlen(temp_input)] = '\0';
 			_cmd.cmd = parse_str(temp_input, " \n");
-			free(_cmd.input);	
+			free(_cmd.input);
 
 			/* get built in function if applicable */
 			b_cmd = get_builtin_cmd(_cmd.cmd[0]);
@@ -74,7 +74,8 @@ int main(int argc, char **argv, char **envir)
 		}
 		_cmd.size = 0;
 		status = handle_status_codes(&_cmd, argv[0], temp_input);
-		free(temp_input);
+		if (_cmd.input_type == F_TERMINAL)
+			free(temp_input);
 		if (status == EXIT_STATUS)
 		{
 			free(_cmd.path);

@@ -16,3 +16,4 @@ void init_cmd(struct command *_cmd, char **envir)
 	_cmd->flags = 0;
 	_cmd->size = 0;
 }
+
