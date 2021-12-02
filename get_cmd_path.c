@@ -16,7 +16,7 @@ int get_cmd_path(struct command *_cmd)
 	f_stat = stat(_cmd->cmd[0], &_stat);
 	if (f_stat == 0)
 	{
-		_cmd->full_cmd_path = _cmd->cmd[0];
+		_cmd->full_cmd_path = _concat(2, _cmd->cmd[0], "");
 		return (SYS_CMD_FOUND);
 	}
 
