@@ -23,7 +23,6 @@
 #define MAXCMDSIZE 1024
 
 #define DEBUG_MODE 1
-  
 
 /* STATUS CODES - TODO */
 #define BASE_STATUS 0
@@ -102,11 +101,13 @@ void init_cmd(struct command *_cmd, char **envir);
 char **parse_str(char *str, char *del);
 
 /* env_methods.c */
+void _setenv(const char *variable, const char *value, int overwrite);
+void _unsetenv(const char *variable);
 char *_getenv(char *local_cmd);
 
 /* string_methods.c */
 char *str_replace(char *buffer, char *old_s, char *new_s, size_t fpos);
-char *_concat(size_t num_of_buffers, const char * const format, ...);
+char *_concat(size_t num_of_buffers, const char *const format, ...);
 size_t get_occurrences(char c, char *str);
 
 /* get_cmd_path */
@@ -117,7 +118,6 @@ int handle_status_codes(struct command *_cmd, char *main_file, char *temp_input)
 
 /* signals_handler.c */
 void _sigint();
-
 
 /* ===== COLORS ======== */
 #define BLACK "\033[0;31m"
@@ -137,8 +137,6 @@ void _sigint();
 #define LIGHT_CYAN "\033[1;36"
 #define WHITE "\033[1;37m"
 
-
 /* ===== DEBUG ========= */
-
 
 #endif

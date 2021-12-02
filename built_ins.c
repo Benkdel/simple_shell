@@ -45,6 +45,26 @@ void clear_screen(struct command *_cmd)
  */
 void change_dir(struct command *_cmd)
 {
-	(void)_cmd;
-	/* todo */
+	char *new_dir, *old_dir, *curr_dir;
+
+	old_dir = _getenv("OLDPWD");
+	curr_dir = _getenv("PWD");
+
+	if (_cmd->cmd[1] != NULL)
+	{
+		new_dir = _getenv("HOME");
+	}
+	else if (strncmp(_cmd->cmd[1], "-", 1) == 0)
+	{
+		new_dir = old_dir;
+	}
+	else
+	{
+		new_dir = _cmd->cmd[1];
+	}
+
+	_setenv("PWD", new_dir, 1);
+	_setenv("OLDPWD", curr_dir, 1);
+
+	chdir(new_dir);
 }
