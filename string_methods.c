@@ -64,17 +64,13 @@ char *str_replace(char *buffer, char *old_s, char *new_s, size_t fpos)
 
 	len_old = strlen(old_s);
 	len_new = strlen(new_s);
-	len_total = strlen(buffer) - len_old + len_new;
+	len_total = strlen(buffer) - len_old + len_new + 1;
 
 	/* assign memory for remaining buffer */
 	temp = malloc(sizeof(char) * len_total);
+	memset(temp, 0, len_total);
 	if (temp == NULL)
-	{
-		free(buffer);
 		return (NULL);
-	}
-	temp[strlen(temp) - 1] = '\0';
-
 	for (i = 0, j = 0; buffer[i]; i++)
 	{
 		if (i < fpos || i > (fpos + len_old - 1))
@@ -92,6 +88,7 @@ char *str_replace(char *buffer, char *old_s, char *new_s, size_t fpos)
 			i += len_old - 1;
 		}
 	}
+	temp[strlen(temp) - 1] = '\0';
 	return (temp);
 }
 

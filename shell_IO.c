@@ -28,32 +28,35 @@ char *get_cwd()
  * print_prompt - prints desc + username
  * Return: none - void function
  */
-void print_prompt_2()
+void print_prompt()
 {
-	char *cwd, *prompt, *home;
+	char *pwd, *home;
 
 	/* get current directory */
-	cwd = get_cwd();
-        if (cwd == NULL)
-		return;
+	pwd = _getenv("PWD");
+
 	/* replace home dir with ~ */
 	home = getenv("HOME");
-	cwd = str_replace(cwd, home, "~", 0);
-	cwd[strlen(cwd) - 1] = '\0';
+	pwd = str_replace(pwd, home, "~", 0);
+	pwd[strlen(pwd) - 1] = '\0';
 
 	/* concatenate prompt message */
-	prompt = _concat(6, GREEN, "[shell-v0.1]", LIGHT_BLUE, cwd, "$ ", BROWN);
-	write(STDOUT_FILENO, prompt, strlen(prompt));
-	free(cwd);
-	free(prompt);
+	write(STDOUT_FILENO, GREEN, strlen(BLUE));
+	write(STDOUT_FILENO, "#cisfun$ ", 10);
+	write(STDOUT_FILENO, BROWN, strlen(BLUE));
+	write(STDOUT_FILENO, pwd, strlen(pwd));
+	write(STDOUT_FILENO, WHITE, strlen(WHITE));
+	write(STDOUT_FILENO, "$ ", 3);
+
+	free(pwd);
 }
 
 /**
  * print_prompt - prints desc + username
  * Return: none - void function
  */
-void print_prompt()
-{	
+void print_prompt_2()
+{
 	write(STDOUT_FILENO, BROWN, strlen(BLUE));
 	write(STDOUT_FILENO, "#cisfun$ ", 10);
 	write(STDOUT_FILENO, WHITE, strlen(WHITE));
