@@ -18,7 +18,7 @@ char *_concat(size_t num_of_buffers, const char *const format, ...)
 	buffer = malloc(sizeof(char *) * num_of_buffers);
 	if (buffer == NULL)
 		return (NULL);
-	for(i = 0; i < (int)num_of_buffers; i++)
+	for (i = 0; i < (int)num_of_buffers; i++)
 		buffer[i] = NULL;
 
 	buffer[0] = (char *)format;
@@ -88,7 +88,7 @@ char *str_replace(char *buffer, char *old_s, char *new_s, size_t fpos)
 			i += len_old - 1;
 		}
 	}
-	temp[strlen(temp) - 1] = '\0';
+	temp[strlen(temp)] = '\0';
 	return (temp);
 }
 
@@ -108,4 +108,38 @@ size_t get_occurrences(char c, char *str)
 			len++;
 	}
 	return (len);
+}
+
+/**
+ * find_subnstr - finds first occurrence of a substring in string
+ * @str: string to look in to
+ * @sub: substring to look for
+ * @n: number of chars to check
+ * Return: position of char if found, otherwise return -1
+ */
+ssize_t find_subnstr(const char *str, const char *sub, size_t n)
+{
+	ssize_t position = -1;
+	size_t counter = 0, i, j;
+
+	for (i = 0; str[i]; i++)
+	{
+		if (str[i] == sub[0])
+		{
+			position = i;
+			for (j = 0; j < n && str[i] == sub[j]; i++, j++)
+			{
+				counter++;
+			}
+			if (counter == n)
+				return (position);
+			else
+			{
+				i -= counter;
+				counter = 0;
+				position = -1;
+			}
+		}
+	}
+	return (position);
 }

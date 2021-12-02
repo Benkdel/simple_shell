@@ -30,6 +30,7 @@
 #define SYS_CMD_FOUND 2
 #define SYS_CMD_NOTFOUND -2
 #define FORK_FAILED -3
+#define DIR_NOTFOUND -4
 
 /* INPUT TYPE */
 #define F_TERMINAL 0
@@ -105,10 +106,14 @@ void _setenv(const char *variable, const char *value, int overwrite);
 void _unsetenv(const char *variable);
 char *_getenv(char *local_cmd);
 
+/* get_dir_pathname.c */
+char *get_dir_pathname(char *target_dir, char *current_dir);
+
 /* string_methods.c */
 char *str_replace(char *buffer, char *old_s, char *new_s, size_t fpos);
 char *_concat(size_t num_of_buffers, const char *const format, ...);
 size_t get_occurrences(char c, char *str);
+ssize_t find_subnstr(const char *str, const char *sub, size_t n);
 
 /* get_cmd_path */
 int get_cmd_path(struct command *_cmd);

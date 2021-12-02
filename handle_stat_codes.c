@@ -15,6 +15,7 @@ int handle_status_codes(struct command *_cmd, char *main_file, char *temp_input)
 		status = EXIT_STATUS;
 		break;
 	case SYS_CMD_NOTFOUND:
+	case DIR_NOTFOUND:
 		if (_cmd->input_type == F_TERMINAL)
 		{
 			printf("%s: No such file or directory\n", main_file);	
