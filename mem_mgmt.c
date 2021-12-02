@@ -14,6 +14,7 @@ void init_cmd(struct command *_cmd, char **envir)
 	_cmd->input_type = F_TERMINAL;
 	_cmd->lines_counter = 0;
 	_cmd->flags = 0;
+	_cmd->exit_code = 0;
 	_cmd->size = 0;
 }
 

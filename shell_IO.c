@@ -54,7 +54,10 @@ void print_prompt_2()
  */
 void print_prompt()
 {	
-	write(STDOUT_FILENO, "\033[0;32mShell-$ \033[0;33m", 23);
+	write(STDOUT_FILENO, BROWN, strlen(BLUE));
+	write(STDOUT_FILENO, "#cisfun$ ", 10);
+	write(STDOUT_FILENO, WHITE, strlen(WHITE));
+	/* write(STDOUT_FILENO, "\033[00;32m-cisfun$ \033[00;00m", 23);*/
 }
 
 /**

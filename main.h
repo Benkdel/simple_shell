@@ -16,6 +16,8 @@
 
 #include <stdarg.h>
 
+#include <errno.h>
+
 /* General Macros */
 #define clear(void) write(STDOUT_FILENO, " \033[1;1H\033[2J", 12)
 #define MAXCMDSIZE 1024
@@ -54,6 +56,7 @@ typedef struct command
 	char *input;
 	char *full_cmd_path;
 	int status_code;
+	int exit_code;
 	int input_type;
 	int lines_counter;
 	int flags;
@@ -90,14 +93,15 @@ void (*get_builtin_cmd(const char *key))(struct command *_cmd);
 void exit_shell(struct command *_cmd);
 void ppath(struct command *_cmd);
 void clear_screen(struct command *_cmd);
+void change_dir(struct command *_cmd);
 
 /* mem_mgmt.c */
 void init_cmd(struct command *_cmd, char **envir);
 
 /* shell_str_parsing */
-void parse_input(struct command *_cmd);
 char **parse_str(char *str, char *del);
-void parse_path(struct command *_cmd);
+
+/* env_methods.c */
 char *_getenv(char *local_cmd);
 
 /* string_methods.c */

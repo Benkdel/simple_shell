@@ -31,12 +31,3 @@ char **parse_str(char *str, char *del)
 	return (parsed);
 }
 
-/**
- * _getenv - get env variable from path
- * @local_cmd: local cmd
- * Return: pointer to result if found. Ow, NULL
- */
-char *_getenv(char *local_cmd)
-{
-	return (getenv(local_cmd));
-}

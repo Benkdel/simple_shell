@@ -17,7 +17,7 @@ int handle_status_codes(struct command *_cmd, char *main_file, char *temp_input)
 	case SYS_CMD_NOTFOUND:
 		if (_cmd->input_type == F_TERMINAL)
 		{
-			write(STDOUT_FILENO, "Command not found!\n", 20);	
+			printf("%s: No such file or directory\n", main_file);	
 		}
 		else  /*_cmd->input_type == F_NOT_TERMINAL */
 		{
