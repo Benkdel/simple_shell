@@ -19,7 +19,10 @@ char *get_dir_pathname(char *target_dir, char *current_dir)
 	}
 	else
 	{
-		dir_pathname = _concat(3, current_dir, "/", target_dir);
+		if (find_subnstr(target_dir, "/", 1) == 0)
+			dir_pathname = _concat(2, target_dir, "/");
+		else
+			dir_pathname = _concat(3, current_dir, "/", target_dir);
 	}
 	return (dir_pathname);
 }

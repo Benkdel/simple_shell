@@ -59,6 +59,7 @@ void change_dir(struct command *_cmd)
 	else if (strncmp(_cmd->cmd[1], "-", 1) == 0)
 	{
 		new_dir = old_dir;
+		printf("%s\n", new_dir);
 	}
 	else
 	{

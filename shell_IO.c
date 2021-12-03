@@ -31,13 +31,18 @@ char *get_cwd()
 void print_prompt()
 {
 	char *pwd, *home;
+	ssize_t home_found = 0;
 
 	/* get current directory */
 	pwd = _getenv("PWD");
 
 	/* replace home dir with ~ */
 	home = getenv("HOME");
-	pwd = str_replace(pwd, home, "~", 0);
+	if (find_subnstr(pwd, home, strlen(home)) != -1)
+	{
+		pwd = str_replace(pwd, home, "~", 0);
+		home_found = 1;
+	}
 	pwd[strlen(pwd) - 1] = '\0';
 
 	/* concatenate prompt message */
@@ -48,7 +53,8 @@ void print_prompt()
 	write(STDOUT_FILENO, WHITE, strlen(WHITE));
 	write(STDOUT_FILENO, "$ ", 3);
 
-	free(pwd);
+	if (home_found == 1)
+		free(pwd);
 }
 
 /**
