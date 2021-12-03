@@ -83,7 +83,7 @@ typedef struct builtin_cmd
 } b_cmd;
 
 /* shell_calls.c */
-void init_shell(void);
+void init_shell(struct command *_cmd);
 void sys_cmd_exec(struct command *_cmd);
 
 /* shell_IO.c */

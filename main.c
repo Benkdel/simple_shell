@@ -10,9 +10,9 @@
 int main(int argc, char **argv, char **envir)
 {
 	cmd _cmd;
-	void (*b_cmd)(struct command * _cmd);
+	void (*b_cmd)(struct command *_cmd);
 	int status = 0;
-	char *temp_input;
+	/* char *temp_input; */
 
 	(void)argc;
 	(void)argv;
@@ -20,13 +20,9 @@ int main(int argc, char **argv, char **envir)
 
 	/* Init main struct */
 	init_cmd(&_cmd, envir);
-	if (!isatty(fileno(stdin)))
-		_cmd.input_type = F_NOT_TERMINAL;
-	else
-	{
-		init_shell();
-		print_prompt();
-	}
+	if (isatty(fileno(stdin)))
+		init_shell(&_cmd);
+
 	_cmd.path = parse_str(_getenv("PATH"), ":\n");
 
 	while (1)
@@ -46,12 +42,12 @@ int main(int argc, char **argv, char **envir)
 		{
 			_cmd.lines_counter++;
 			/* Parse Input into cmd - using space as delimiter */
-			temp_input = malloc(sizeof(char) * (_cmd.size + 1));
+			/*temp_input = malloc(sizeof(char) * (_cmd.size + 1));
 			memset(temp_input, 0, _cmd.size + 1);
 			temp_input = strncpy(temp_input, _cmd.input, _cmd.size + 1);
-			temp_input[strlen(temp_input)] = '\0';
-			_cmd.cmd = parse_str(temp_input, " \n");
-			free(_cmd.input);
+			temp_input[strlen(temp_input)] = '\0';*/
+			_cmd.cmd = parse_str(_cmd.input, " \n"); /* temp_input */
+			/* free(_cmd.input); */
 
 			/* get built in function if applicable */
 			b_cmd = get_builtin_cmd(_cmd.cmd[0]);
@@ -71,9 +67,9 @@ int main(int argc, char **argv, char **envir)
 			free(_cmd.cmd);
 		}
 		_cmd.size = 0;
-		status = handle_status_codes(&_cmd, argv[0], temp_input);
+		status = handle_status_codes(&_cmd, argv[0], _cmd.input); /* temp_input */
 		if (_cmd.input_type == F_TERMINAL)
-			free(temp_input);
+			free(_cmd.input); /* temp_input */
 		if (status == EXIT_STATUS)
 		{
 			free(_cmd.path);

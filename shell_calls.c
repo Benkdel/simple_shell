@@ -2,12 +2,14 @@
 
 /**
  * init_shell - init shell with message
+ * @_cmd: main data struct
  * Return: none - void function
  */
-void init_shell(void)
+void init_shell(struct command *_cmd)
 {
 	char *user_name = getenv("USER");
 
+	_cmd->input_type = F_TERMINAL;
 	clear();
 	printf("\n\n******************");
 	printf("************************");
@@ -18,6 +20,7 @@ void init_shell(void)
 	printf("\n\n\n\033[1;37m*******************");
 	printf("***********************");
 	printf("\n\n\n\033[0;32mCURRENT USER: \033[1;37m@%s\n", user_name);
+	print_prompt();
 }
 
 /**
