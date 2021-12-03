@@ -10,20 +10,14 @@
 int main(int argc, char **argv, char **envir)
 {
 	cmd _cmd;
-	void (*b_cmd)(struct command * _cmd);
+	void (*b_cmd)(struct command *_cmd);
 	int status = 0;
 
-	(void)argc;
-	(void)argv;
-	(void)envir;
-
-	/* Init main struct */
+	(void)argc, (void)argv, (void)envir;
 	init_cmd(&_cmd, envir);
 	if (isatty(fileno(stdin)))
 		init_shell(&_cmd);
-
 	_cmd.path = parse_str(_getenv("PATH"), ":\n");
-
 	while (1)
 	{
 		signal(SIGINT, _sigint);
@@ -32,7 +26,6 @@ int main(int argc, char **argv, char **envir)
 		{
 			_cmd.lines_counter++;
 			_cmd.cmd = parse_str(_cmd.input, " \n");
-
 			b_cmd = get_builtin_cmd(_cmd.cmd[0]);
 			if (b_cmd != NULL)
 				b_cmd(&_cmd);
