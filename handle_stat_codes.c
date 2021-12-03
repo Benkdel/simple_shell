@@ -11,6 +11,7 @@ int handle_status_codes(struct command *_cmd, char *main_file, char *input)
 {
 	int status = 0;
 
+	_cmd->size = 0;
 	switch (_cmd->status_code)
 	{
 	case EXIT_STATUS:
@@ -39,5 +40,6 @@ int handle_status_codes(struct command *_cmd, char *main_file, char *input)
 	default:
 		break;
 	}
+	free(_cmd->input);
 	return (status);
 }

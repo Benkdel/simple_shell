@@ -59,10 +59,7 @@ int main(int argc, char **argv, char **envir)
 			}
 			free(_cmd.cmd);
 		}
-		_cmd.size = 0;
 		status = handle_status_codes(&_cmd, argv[0], _cmd.input);
-		if (_cmd.input_type == F_TERMINAL)
-			free(_cmd.input);
 		if (status == EXIT_STATUS)
 		{
 			free(_cmd.path);
