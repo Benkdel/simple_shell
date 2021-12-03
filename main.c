@@ -10,7 +10,7 @@
 int main(int argc, char **argv, char **envir)
 {
 	cmd _cmd;
-	void (*b_cmd)(struct command *_cmd);
+	void (*b_cmd)(struct command * _cmd);
 	int status = 0;
 
 	(void)argc;
@@ -27,35 +27,20 @@ int main(int argc, char **argv, char **envir)
 	while (1)
 	{
 		signal(SIGINT, _sigint);
-		/* Gets input from user and sets size of chars readed */
 		read_command(&_cmd);
-		if (_cmd.status_code == EXIT_STATUS)
-		{
-			free(_cmd.path);
-			free(_cmd.input);
-			if (_cmd.input_type == F_TERMINAL)
-				clear(void);
-			return (-1);
-		}
 		if (_cmd.size > 1)
 		{
 			_cmd.lines_counter++;
 			_cmd.cmd = parse_str(_cmd.input, " \n");
-			
-			/* get built in function if applicable */
+
 			b_cmd = get_builtin_cmd(_cmd.cmd[0]);
 			if (b_cmd != NULL)
-			{
 				b_cmd(&_cmd);
-			}
 			else
 			{
-				/* call sys_call_function */
 				sys_cmd_exec(&_cmd);
 				if (_cmd.status_code != SYS_CMD_NOTFOUND)
-				{
 					free(_cmd.full_cmd_path);
-				}
 			}
 			free(_cmd.cmd);
 		}
