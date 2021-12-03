@@ -2,7 +2,8 @@
 
 /**
  * _concat - concatenates two or more strings
- * @format: variadic function - strings buffers to concatenate 
+ * @num_of_buffers: number of repeated args passed
+ * @format: variadic function - strings buffers to concatenate
  * Return: pointer to a new string
  */
 char *_concat(size_t num_of_buffers, const char *const format, ...)
@@ -51,8 +52,8 @@ char *_concat(size_t num_of_buffers, const char *const format, ...)
 /**
  * str_replace - replaces a string with another one
  * @buffer: buffer with the string
- * @old: str to be replacecd
- * @new: new str
+ * @old_s: str to be replacecd
+ * @new_s: new str
  * @fpos: starting position old str, starting at index 0
  * Return: pointer to char * buffer
  */
@@ -128,17 +129,12 @@ ssize_t find_subnstr(const char *str, const char *sub, size_t n)
 		{
 			position = i;
 			for (j = 0; j < n && str[i] == sub[j]; i++, j++)
-			{
 				counter++;
-			}
 			if (counter == n)
 				return (position);
-			else
-			{
-				i -= counter;
-				counter = 0;
-				position = -1;
-			}
+			i -= counter;
+			counter = 0;
+			position = -1;
 		}
 	}
 	return (position);

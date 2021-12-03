@@ -2,7 +2,9 @@
 
 /**
  * get_dir_pathname - build full path for directory
- * @
+ * @target_dir: argument of cd - directory to go to
+ * @current_dir: pwd
+ * Return: pointer to a string with full directory pathname
  */
 char *get_dir_pathname(char *target_dir, char *current_dir)
 {
@@ -15,7 +17,6 @@ char *get_dir_pathname(char *target_dir, char *current_dir)
 	{
 		/* "../" found - go back dirs as ../ and rebuild path*/
 		/* TODO */
-
 	}
 	else
 	{

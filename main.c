@@ -2,6 +2,9 @@
 
 /**
  * main - Entry Point for myShell
+ * @argc: argument count
+ * @argv: string of arguments
+ * @envir: string of env variables
  * Return: 0 (on Success)
  */
 int main(int argc, char **argv, char **envir)
@@ -17,18 +20,13 @@ int main(int argc, char **argv, char **envir)
 
 	/* Init main struct */
 	init_cmd(&_cmd, envir);
-
 	if (!isatty(fileno(stdin)))
 		_cmd.input_type = F_NOT_TERMINAL;
-
-	/* init shell program - display welcoming mssg and authors */
-	if (_cmd.input_type == F_TERMINAL)
+	else
 	{
 		init_shell();
 		print_prompt();
 	}
-
-	/* set PATH into tokens */
 	_cmd.path = parse_str(_getenv("PATH"), ":\n");
 
 	while (1)

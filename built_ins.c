@@ -2,6 +2,7 @@
 
 /**
  * exit_shell - exit shell, sets flag value to -1
+ * @_cmd: main data struct
  * Return: none - void function
  */
 void exit_shell(struct command *_cmd)
@@ -75,7 +76,7 @@ void change_dir(struct command *_cmd)
 	}
 	else
 		_cmd->status_code = DIR_NOTFOUND;
-	
+
 	if (free_mem == 1)
 		free(new_dir);
 }

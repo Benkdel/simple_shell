@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * get_cmd_path - gets path of command in envi b                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+ * get_cmd_path - get full path of sys command
  * @_cmd: main data struct
  * Return: 2 if succeded, -2 if failed
  */

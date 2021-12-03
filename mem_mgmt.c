@@ -3,6 +3,7 @@
 /**
  * init_cmd - initialize main struct
  * @_cmd: main struct
+ * @envir: envirorment list
  * Return: none - void
  */
 void init_cmd(struct command *_cmd, char **envir)
@@ -17,4 +18,3 @@ void init_cmd(struct command *_cmd, char **envir)
 	_cmd->exit_code = 0;
 	_cmd->size = 0;
 }
-

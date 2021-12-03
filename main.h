@@ -77,13 +77,12 @@ typedef struct builtin_cmd
 } b_cmd;
 
 /* shell_calls.c */
-void init_shell();
+void init_shell(void);
 void sys_cmd_exec(struct command *_cmd);
 
 /* shell_IO.c */
-char *get_cwd();
 void read_command(struct command *_cmd);
-void print_prompt();
+void print_prompt(void);
 void show_prev_cmd(struct command *_cmd);
 
 /* get_builtin_cmd.c */
@@ -122,7 +121,7 @@ int get_cmd_path(struct command *_cmd);
 int handle_status_codes(struct command *_cmd, char *main_file, char *temp_input);
 
 /* signals_handler.c */
-void _sigint();
+void _sigint(void);
 
 /* ===== COLORS ======== */
 #define BLACK "\033[0;31m"
