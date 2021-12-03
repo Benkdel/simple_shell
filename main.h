@@ -41,12 +41,18 @@
 /* structures */
 
 /**
- * command - command data structure
+ * struct command - command data structure
  * @cmd: array of string with parsed input > command
- * @env_list: envirorment variables  
- * @size: current size of used buffer
+ * @env_list: envirorment variables
  * @path: parsed path from envi list
+ * @input: command read by readline - raw
+ * @full_cmd_path: path pre appending full name if neccesary
+ * @status_code: code used to performe shell operations
+ * @exit_code: used to signal exit action
+ * @input_type: track if input comes from terminal or other source
+ * @lines_counter: to display multiple errors if necessary
  * @flags: keep track of currents flags (pipe, exit, etc)
+ * @size: current size of used buffer
  */
 typedef struct command
 {
@@ -66,7 +72,7 @@ typedef struct command
 /**
  * struct builtin_cmd - choose functions format
  *
- * @key: key is first token of parsed command
+ * @b_key: key is first token of parsed command
  * @b_function: pointer to builtin function
  *
  */
@@ -118,7 +124,7 @@ ssize_t find_subnstr(const char *str, const char *sub, size_t n);
 int get_cmd_path(struct command *_cmd);
 
 /* handle_flags.c */
-int handle_status_codes(struct command *_cmd, char *main_file, char *temp_input);
+int handle_status_codes(struct command *_cmd, char *main_file, char *input);
 
 /* signals_handler.c */
 void _sigint(void);
