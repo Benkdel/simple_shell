@@ -33,7 +33,7 @@ void sys_cmd_exec(struct command *_cmd)
 	pid_t child_pid;
 	int status = -1;
 
-	if (_cmd->cmd == NULL)
+	if (_cmd->cmd == NULL || _cmd->cmd[0] == NULL)
 		return;
 
 	/* find path */

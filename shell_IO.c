@@ -83,14 +83,6 @@ void read_command(struct command *_cmd)
 
 	_cmd->input = NULL;
 	nread = getline(&(_cmd->input), &len, stdin);
-	
-	if (only_spaces(_cmd->input, nread - 1) == 0)
-	{
-		nread = 0;
-		if (_cmd->input_type == F_NOT_TERMINAL)
-			_cmd->status_code = EXIT_STATUS;
-		return;
-	}
 	if (nread == EOF)
 	{
 		_cmd->status_code = EXIT_STATUS;

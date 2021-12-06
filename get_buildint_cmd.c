@@ -16,6 +16,9 @@ void (*get_builtin_cmd(const char *key))(struct command *_cmd)
 	size_t b_key_len;
 	int i = 0;
 
+	if (key == NULL)
+		return (NULL);
+
 	while (i < 4)
 	{
 		b_key_len = strlen(options[i].b_key);

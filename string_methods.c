@@ -139,23 +139,3 @@ ssize_t find_subnstr(const char *str, const char *sub, size_t n)
 	}
 	return (position);
 }
-
-/**
- * only_spaces - check if input readed is only white spaces
- * @str: string to check
- * @n: size of input readed
- * Return: 0 if true, 1 if false
- */
-int only_spaces(const char *str, ssize_t n)
-{
-	int i;
-
-	for (i = 0; i < n; i++)
-	{
-		if (str[i] != ' ')
-		{
-			return (1);
-		}
-	}
-	return (0);
-}
