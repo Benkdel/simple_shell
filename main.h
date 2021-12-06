@@ -120,6 +120,7 @@ char *str_replace(char *buffer, char *old_s, char *new_s, size_t fpos);
 char *_concat(size_t num_of_buffers, const char *const format, ...);
 size_t get_occurrences(char c, char *str);
 ssize_t find_subnstr(const char *str, const char *sub, size_t n);
+int only_spaces(const char *str, ssize_t n);
 
 /* get_cmd_path */
 int get_cmd_path(struct command *_cmd);
