@@ -1,0 +1,64 @@
+.TH OWN_SH 1 06/12/2021 "Holberton(Carlos, Haru)" "MANUAL DE NUESTRO OWN SHELL"
+
+.SH NAME
+OWN_SH - Our own Emulator of the Linux Shell
+
+.SH SYNOPSIS
+	command [command_options] ...
+
+.SH DESCRIPTION
+The utility of our Own Shell is to interpret the commands that it will execute, commands read from a command line string, standard input or a specified file. The application must make sure that the commands to be executed are in the PATH or other functions created by us from some original linux functions.
+.P
+Pathname expansion will not fail due to the size of a file.
+
+.SH EXAMPLES
+.B INTERACTIVE MODE
+.nf
+	When we run Our Shell, the following will appear:
+	CURRENT USER: @humtej1204
+	Shell-$
+	
+	If we write an existing command on the command line,
+	our shell will execute the corresponding program:
+	Shell-$ ls
+	AUTHORS    Tests        external            get_cmd_path.c      
+	help_files  main.c  	man_1_simple_shell  shell_IO.c  
+	shell_str_parsing.c	string_methods.cREADME.md	built_ins.c
+	get_buildint_cmd.c	handle_stat_codes.c	hsh	main.h
+	mem_mgmt.c		shell_calls.c		signals_handler.c
+	Shell-$
+	
+	If we write a command that does not exist on the
+	command line, our shell will give us an error message:
+	Shell-$ asd
+	Command not found!
+	Shell-$
+.fi
+.P
+.B NON INTERACTIVE MODE
+.nf
+	$ echo "ls" | ./hsh
+	AUTHORS    Tests        external            get_cmd_path.c
+	help_files  main.c  man_1_simple_shell  shell_IO.c
+	shell_str_parsing.c  string_methods.c	README.md
+	built_ins.c  get_buildint_cmd.c  handle_stat_codes.c  hsh
+	main.h  mem_mgmt.c          shell_calls.c  signals_handler.c
+	$
+.fi
+
+.SH EXIT STATUS
+The following exit values shall be returned:
+.TP
+.B 0
+The script to be executed consisted solely of zero or more blank lines or comments, or both.
+.TP
+.B 1-125
+A non-interactive shell detected a syntax, redirection, or variable assignment error.
+.TP
+.B 127
+A specified command_file could not be found by a non-interactive shell.
+
+.SH AUTHORS
+.B Humberto Tejada
+.br
+.B Carlos Bentin
