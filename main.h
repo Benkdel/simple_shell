@@ -90,6 +90,7 @@ void sys_cmd_exec(struct command *_cmd);
 void read_command(struct command *_cmd);
 void print_prompt(void);
 void show_prev_cmd(struct command *_cmd);
+int _getline(char **buff, size_t *size, FILE *file);
 
 /* get_builtin_cmd.c */
 void (*get_builtin_cmd(const char *key))(struct command *_cmd);

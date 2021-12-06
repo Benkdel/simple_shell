@@ -28,21 +28,47 @@ void print_prompt(void)
 	write(STDOUT_FILENO, pwd, strlen(pwd));
 	write(STDOUT_FILENO, WHITE, strlen(WHITE));
 	write(STDOUT_FILENO, "$ ", 3);
-
 	if (home_found == 1)
 		free(pwd);
 }
 
 /**
- * print_prompt_2 - prints desc + username
- * Return: none - void function
+ * _getline - custome getline function
+ * @buff: buffer to read input into
+ * @size: size of bytes to read
+ * @file: source of input
+ * Return: bytes read if succeded, -1 if error
  */
-void print_prompt_2(void)
+int _getline(char **buff, size_t *size, FILE *file)
 {
-	write(STDOUT_FILENO, BROWN, strlen(BLUE));
-	write(STDOUT_FILENO, "#cisfun$ ", 10);
-	write(STDOUT_FILENO, WHITE, strlen(WHITE));
-	/* write(STDOUT_FILENO, "\033[00;32m-cisfun$ \033[00;00m", 23);*/
+	char l[1024];
+	int n = 0, rd, fd, i = 0;
+
+	if (file == stdin)
+		fd = 0;
+	else if (file == stdout)
+		fd = 1;
+	else if (file == stderr)
+		fd = 2;
+	else
+		perror("NO FILE STREAM DETECTED");
+
+	*size = 1024;
+	rd = read(fd, l, *size);
+	if (rd == -1)
+		return (-1);
+
+	while (l[n] != '\0')
+	{
+		n++;
+	}
+
+	while (i < n - 1)
+	{
+		buff[0][i] = l[i];
+		i++;
+	}
+	return (n - 1);
 }
 
 /**

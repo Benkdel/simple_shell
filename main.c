@@ -15,9 +15,8 @@ int main(int argc, char **argv, char **envir)
 
 	(void)argc, (void)argv, (void)envir;
 	init_cmd(&_cmd, envir);
-	if (isatty(fileno(stdin)))
+	if (isatty(fileno(stdin)) == 1)
 		init_shell(&_cmd);
-	_cmd.path = parse_str(_getenv("PATH"), ":\n");
 	while (1)
 	{
 		signal(SIGINT, _sigint);
@@ -25,7 +24,7 @@ int main(int argc, char **argv, char **envir)
 		if (_cmd.size > 1)
 		{
 			_cmd.lines_counter++;
-			_cmd.cmd = parse_str(_cmd.input, " \n");
+			_cmd.cmd = parse_str(_cmd.input, " ");
 			b_cmd = get_builtin_cmd(_cmd.cmd[0]);
 			if (b_cmd != NULL)
 				b_cmd(&_cmd);
@@ -43,7 +42,7 @@ int main(int argc, char **argv, char **envir)
 			free(_cmd.path);
 			if (_cmd.input_type == F_TERMINAL)
 				clear(void);
-			exit(_cmd.exit_code);
+			exit(errno);
 		}
 		if (_cmd.input_type == F_TERMINAL)
 			print_prompt();

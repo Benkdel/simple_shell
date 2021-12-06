@@ -53,12 +53,11 @@ void sys_cmd_exec(struct command *_cmd)
 			free(_cmd->full_cmd_path);
 		}
 		else
-		{
 			wait(&status);
-		}
 	}
 	else
 	{
+		/* handle file not found - error should be set on 127? */
 		if (_cmd->status_code == BASE_STATUS)
 			_cmd->status_code = SYS_CMD_NOTFOUND;
 	}

@@ -10,6 +10,7 @@ void init_cmd(struct command *_cmd, char **envir)
 {
 	_cmd->env_list = envir;
 	_cmd->input = NULL;
+	_cmd->path = parse_str(_getenv("PATH"), ":\n");
 	_cmd->full_cmd_path = NULL;
 	_cmd->status_code = BASE_STATUS;
 	_cmd->input_type = F_NOT_TERMINAL;
