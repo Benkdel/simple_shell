@@ -10,7 +10,7 @@
 int main(int argc, char **argv, char **envir)
 {
 	cmd _cmd;
-	void (*b_cmd)(struct command * _cmd);
+	void (*b_cmd)(struct command *_cmd);
 	int status = 0;
 
 	(void)argc, (void)argv, (void)envir;

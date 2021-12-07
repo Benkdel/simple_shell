@@ -10,7 +10,7 @@
 int handle_status_codes(struct command *_cmd, char *main_file, char *input)
 {
 	int status = 0;
-	char *str_err;
+	char *str_err, *lines;
 
 	_cmd->size = 0;
 	switch (_cmd->status_code)
@@ -21,16 +21,14 @@ int handle_status_codes(struct command *_cmd, char *main_file, char *input)
 	case SYS_CMD_NOTFOUND:
 	case DIR_NOTFOUND:
 		if (_cmd->input_type == F_TERMINAL)
-		{
-			str_err = _concat(2, main_file, ": No such file or directory\n");
-			perror(str_err);
-			free(str_err);
-		}
+			perror(main_file);
 		else
 		{
-			str_err = _concat(4, main_file, _cmd->lines_counter, input, ": No found\n");
+			lines = to_str(_cmd->lines_counter);
+			str_err = _concat(5, main_file, ": ", lines, ": ", input);
 			perror(str_err);
 			free(str_err);
+			free(lines);
 		}
 		_cmd->status_code = BASE_STATUS;
 		status = 0;

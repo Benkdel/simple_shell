@@ -36,16 +36,14 @@
 #define F_TERMINAL 0
 #define F_NOT_TERMINAL 1
 
-/* Flags */
-
 /* structures */
 
 /**
  * struct command - command data structure
- * @cmd: array of string with parsed input > command
  * @env_list: envirorment variables
  * @path: parsed path from envi list
  * @input: command read by readline - raw
+ * @cmd: array of string with parsed input > command
  * @full_cmd_path: path pre appending full name if neccesary
  * @status_code: code used to performe shell operations
  * @exit_code: used to signal exit action
@@ -129,6 +127,9 @@ int handle_status_codes(struct command *_cmd, char *main_file, char *input);
 
 /* signals_handler.c */
 void _sigint();
+
+/* types_convert.c */
+char *to_str(int n);
 
 /* ===== COLORS ======== */
 #define BLACK "\033[0;31m"
