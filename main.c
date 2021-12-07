@@ -10,7 +10,7 @@
 int main(int argc, char **argv, char **envir)
 {
 	cmd _cmd;
-	void (*b_cmd)(struct command *_cmd);
+	void (*b_cmd)(struct command * _cmd);
 	int status = 0;
 
 	(void)argc, (void)argv, (void)envir;
@@ -23,7 +23,6 @@ int main(int argc, char **argv, char **envir)
 		read_command(&_cmd);
 		if (_cmd.size > 1)
 		{
-			_cmd.lines_counter++;
 			_cmd.cmd = parse_str(_cmd.input, " ");
 			b_cmd = get_builtin_cmd(_cmd.cmd[0]);
 			if (b_cmd != NULL)
@@ -42,7 +41,7 @@ int main(int argc, char **argv, char **envir)
 			free(_cmd.path);
 			if (_cmd.input_type == F_TERMINAL)
 				clear(void);
-			exit(errno);
+			exit(_cmd.status_code);
 		}
 		if (_cmd.input_type == F_TERMINAL)
 			print_prompt();

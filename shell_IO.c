@@ -81,6 +81,7 @@ void read_command(struct command *_cmd)
 	size_t len = 0;
 	ssize_t nread;
 
+	_cmd->lines_counter++;
 	_cmd->input = NULL;
 	nread = getline(&(_cmd->input), &len, stdin);
 	if (nread == EOF)
