@@ -87,7 +87,8 @@ void sys_cmd_exec(struct command *_cmd);
 /* shell_IO.c */
 void read_command(struct command *_cmd);
 void print_prompt(void);
-void show_prev_cmd(struct command *_cmd);
+void print_simple_prompt(void);
+void print_fancy_prompt(void);
 int _getline(char **buff, size_t *size, FILE *file);
 
 /* get_builtin_cmd.c */
