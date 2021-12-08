@@ -25,8 +25,8 @@ int handle_status_codes(struct command *_cmd, char *main_file, char *input)
 		else
 		{
 			lines = to_str(_cmd->lines_counter);
-			str_err = _concat(5, main_file, ": ", lines, ": ", input);
-			perror(str_err);
+			str_err = _concat(6, main_file, ": ", lines, ": ", input, ": not found");
+			printf("%s\n", str_err);
 			free(str_err);
 			free(lines);
 		}
