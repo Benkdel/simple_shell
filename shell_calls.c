@@ -10,7 +10,7 @@ void init_shell(struct command *_cmd)
 	/* char *user_name = getenv("USER"); */
 
 	_cmd->input_type = F_TERMINAL;
-	clear();
+	/* clear(); */
 	/**
 	* printf("\n\n******************");
 	* printf("************************");
