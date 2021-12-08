@@ -27,6 +27,7 @@ int handle_status_codes(struct command *_cmd, char *main_file, char *input)
 			lines = to_str(_cmd->lines_counter);
 			str_err = _concat(6, main_file, ": ", lines, ": ", input, ": not found");
 			write(STDERR_FILENO, str_err, strlen(str_err));
+			write(STDERR_FILENO, "\n", 2);
 			free(str_err);
 			free(lines);
 		}
