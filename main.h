@@ -96,7 +96,7 @@ void (*get_builtin_cmd(const char *key))(struct command *_cmd);
 
 /* built_ins.c */
 void exit_shell(struct command *_cmd);
-void ppath(struct command *_cmd);
+void env(struct command *_cmd);
 void clear_screen(struct command *_cmd);
 void change_dir(struct command *_cmd);
 

@@ -13,22 +13,6 @@ void exit_shell(struct command *_cmd)
 }
 
 /**
- * ppath - print parsed path to console
- * @_cmd: main data struct
- * Return: none - void function
- */
-void ppath(struct command *_cmd)
-{
-	int i = 0;
-
-	while (_cmd->path[i])
-	{
-		printf("PATH [%d] -> %s\n", i, _cmd->path[i]);
-		i++;
-	}
-}
-
-/**
  * clear_screen - clears screens
  * @_cmd: main data struct
  * Return: none - void function
@@ -79,4 +63,20 @@ void change_dir(struct command *_cmd)
 
 	if (free_mem == 1)
 		free(new_dir);
+}
+
+/**
+ * env - print current environment
+ * @_cmd: main data struct
+ * Return: none - void function
+ */
+void env(struct command *_cmd)
+{
+	int i = 0;
+
+	for (i = 0; _cmd->env_list[i] != NULL; i++)
+	{
+		write(STDOUT_FILENO, _cmd->env_list[i], strlen(_cmd->env_list[i]));
+		write(STDOUT_FILENO, "\n", 1);
+	}
 }

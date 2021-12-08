@@ -38,7 +38,7 @@ int main(int argc  __attribute__((unused)), char **argv, char **envir)
 		if (status == EXIT_STATUS)
 		{
 			free(_cmd.path);
-			exit(0);
+			exit(_cmd.exit_code);
 		}
 		if (_cmd.input_type == F_TERMINAL)
 			print_prompt();

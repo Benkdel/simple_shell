@@ -9,7 +9,7 @@ void (*get_builtin_cmd(const char *key))(struct command *_cmd)
 {
 	b_cmd options[] = {
 	    {"exit", exit_shell},
-	    {"ppath", ppath},
+	    {"env", env},
 	    {"clear", clear_screen},
 	    {"cd", change_dir},
 	    {NULL, NULL}};
