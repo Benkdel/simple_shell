@@ -41,7 +41,7 @@ int main(int argc, char **argv, char **envir)
 			free(_cmd.path);
 			/* if (_cmd.input_type == F_TERMINAL)
 				clear(void); */
-			exit(_cmd.status_code);
+			exit(errno);
 		}
 		if (_cmd.input_type == F_TERMINAL)
 			print_prompt();
