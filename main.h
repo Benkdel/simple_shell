@@ -87,11 +87,69 @@ void sys_cmd_exec(struct command *_cmd);
 /* shell_IO.c */
 void read_command(struct command *_cmd);
 void print_prompt(void);
+void show_prev_cmd(struct command *_cmd);
+int _getline(char **buff, size_t *size, FILE *file);
+
+/* get_builtin_cmd.c */
+void (*get_builtin_cmd(const char *key))(struct command *_cmd);
+
+/* built_ins.c */
+void exit_shell(struct command *_cmd);
+void ppath(struct command *_cmd);
+void clear_screen(struct command *_cmd);
+void change_dir(struct command *_cmd);
 
 /* mem_mgmt.c */
 void init_cmd(struct command *_cmd, char **envir);
 
-/* signals_handler.c */
-void _sigint();
+/* shell_str_parsing */
+char **parse_str(char *str, char *del);
 
+/* env_methods.c */
+void _setenv(const char *variable, const char *value, int overwrite);
+void _unsetenv(const char *variable);
+char *_getenv(char *local_cmd);
+
+/* get_dir_pathname.c */
+char *get_dir_pathname(char *target_dir, char *current_dir);
+
+/* string_methods.c */
+char *str_replace(char *buffer, char *old_s, char *new_s, size_t fpos);
+char *_concat(size_t num_of_buffers, const char *const format, ...);
+size_t get_occurrences(char c, char *str);
+ssize_t find_subnstr(const char *str, const char *sub, size_t n);
+
+/* get_cmd_path */
+int get_cmd_path(struct command *_cmd);
+
+/* handle_flags.c */
+int handle_status_codes(struct command *_cmd, char *main_file, char *input);
+
+/* signals_handler.c */
+void _sigint(void);
+
+/* types_convert.c */
+char *to_str(int n);
+
+/* ===== COLORS ======== */
+#define BLACK "\033[0;31m"
+#define DARK_GREY "\033[1;30m"
+#define LIGHT_GRAY "\033[0;37m"
+#define RED "\033[0;31m"
+#define LIGHT_RED "\033[1;31m"
+#define GREEN "\033[0;32m"
+#define LIGHT_GREEN "\033[1;32m"
+#define BROWN "\033[0;33m"
+#define YELLOW "\033[1;33m"
+#define BLUE "\033[0;34m"
+#define LIGHT_BLUE "\033[1;34m"
+#define PURPLE "\033[0;35m"
+#define LIGHT_PURPLE "\033[1;35m"
+#define CYAN "\033[0;36m"
+#define LIGHT_CYAN "\033[1;36"
+#define WHITE "\033[1;37m"
+
+/* ===== DEBUG ========= */
+
+#endif
 #endif
