@@ -39,8 +39,8 @@ int main(int argc, char **argv, char **envir)
 		if (status == EXIT_STATUS)
 		{
 			free(_cmd.path);
-			if (_cmd.input_type == F_TERMINAL)
-				clear(void);
+			/* if (_cmd.input_type == F_TERMINAL)
+				clear(void); */
 			exit(_cmd.status_code);
 		}
 		if (_cmd.input_type == F_TERMINAL)
