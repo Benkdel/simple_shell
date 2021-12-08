@@ -38,8 +38,6 @@ int main(int argc  __attribute__((unused)), char **argv, char **envir)
 		if (status == EXIT_STATUS)
 		{
 			free(_cmd.path);
-			/* if (_cmd.input_type == F_TERMINAL)
-				clear(void); */
 			exit(0);
 		}
 		if (_cmd.input_type == F_TERMINAL)
