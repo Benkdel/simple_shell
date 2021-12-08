@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * _sigint - avoids program termination on CTRL+C
- * Return: none - void function
+ * shell_signal - function that controls program interruption
+ * @sig: integer number
  */
-void _sigint(void)
+void shell_signal(int sig)
 {
-	write(STDOUT_FILENO, "\n", 2);
-	print_prompt();
+	(void)sig;
+	write(STDOUT_FILENO, "\n:) ", 4);
 }

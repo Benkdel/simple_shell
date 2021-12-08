@@ -127,7 +127,7 @@ int get_cmd_path(struct command *_cmd);
 int handle_status_codes(struct command *_cmd, char *main_file, char *input);
 
 /* signals_handler.c */
-void _sigint();
+void shell_signal(int sig);
 
 /* types_convert.c */
 char *to_str(int n);

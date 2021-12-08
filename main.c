@@ -7,17 +7,16 @@
  * @envir: string of env variables
  * Return: 0 (on Success)
  */
-int main(int argc, char **argv, char **envir)
+int main(int argc  __attribute__((unused)), char **argv, char **envir)
 {
 	cmd _cmd;
 	void (*b_cmd)(struct command *_cmd);
 	int status = 0;
 
-	(void)argc, (void)argv, (void)envir;
 	init_cmd(&_cmd, envir);
 	if (isatty(fileno(stdin)) == 1)
 		init_shell(&_cmd);
-	signal(SIGINT, _sigint);
+	signal(SIGINT, shell_signal);
 	while (1)
 	{
 		read_command(&_cmd);
@@ -41,7 +40,7 @@ int main(int argc, char **argv, char **envir)
 			free(_cmd.path);
 			/* if (_cmd.input_type == F_TERMINAL)
 				clear(void); */
-			exit(errno);
+			exit(0);
 		}
 		if (_cmd.input_type == F_TERMINAL)
 			print_prompt();
