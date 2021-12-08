@@ -109,6 +109,6 @@ void read_command(struct command *_cmd)
 		_cmd->status_code = EXIT_STATUS;
 		return;
 	}
-	_cmd->input[nread - 1] = '\0';
+	/* _cmd->input[nread] = '\0'; */
 	_cmd->size = nread;
 }

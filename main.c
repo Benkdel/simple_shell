@@ -17,13 +17,13 @@ int main(int argc, char **argv, char **envir)
 	init_cmd(&_cmd, envir);
 	if (isatty(fileno(stdin)) == 1)
 		init_shell(&_cmd);
+	signal(SIGINT, _sigint);
 	while (1)
 	{
-		signal(SIGINT, _sigint);
 		read_command(&_cmd);
 		if (_cmd.size > 1)
 		{
-			_cmd.cmd = parse_str(_cmd.input, " ");
+			_cmd.cmd = parse_str(_cmd.input, " \n");
 			b_cmd = get_builtin_cmd(_cmd.cmd[0]);
 			if (b_cmd != NULL)
 				b_cmd(&_cmd);
