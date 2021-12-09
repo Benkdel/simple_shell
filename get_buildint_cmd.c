@@ -12,6 +12,8 @@ void (*get_builtin_cmd(const char *key))(struct command *_cmd)
 	    {"env", env},
 	    {"clear", clear_screen},
 	    {"cd", change_dir},
+	    {"setenv", b_setenv},
+	    {"unsetenv", b_unsetenv},
 	    {NULL, NULL}};
 	size_t b_key_len;
 	int i = 0;

@@ -100,6 +100,10 @@ void env(struct command *_cmd);
 void clear_screen(struct command *_cmd);
 void change_dir(struct command *_cmd);
 
+/* built_ins_2.c */
+void b_setenv(struct command *_cmd);
+void b_unsetenv(struct command *_cmd);
+
 /* mem_mgmt.c */
 void init_cmd(struct command *_cmd, char **envir);
 

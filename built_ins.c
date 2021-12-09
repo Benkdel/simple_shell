@@ -72,11 +72,8 @@ void change_dir(struct command *_cmd)
  */
 void env(struct command *_cmd)
 {
-	int i = 0;
+	unsigned int i = 0;
 
-	for (i = 0; _cmd->env_list[i] != NULL; i++)
-	{
-		write(STDOUT_FILENO, _cmd->env_list[i], strlen(_cmd->env_list[i]));
-		write(STDOUT_FILENO, "\n", 1);
-	}
+	for (i = 0; (_cmd->env_list[i]) != NULL; i++)
+		printf("%s\n", _cmd->env_list[i]);
 }
