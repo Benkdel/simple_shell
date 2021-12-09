@@ -21,7 +21,7 @@ void (*get_builtin_cmd(const char *key))(struct command *_cmd)
 	if (key == NULL)
 		return (NULL);
 
-	while (i < 4)
+	while (i < 6)
 	{
 		b_key_len = strlen(options[i].b_key);
 		if (strncmp(key, options[i].b_key, b_key_len) == 0)

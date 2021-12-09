@@ -15,7 +15,7 @@ void b_setenv(struct command *_cmd)
 	if (_cmd->cmd[2] != NULL)
 		value = _cmd->cmd[2];
 	if (_cmd->cmd[3] != NULL)
-		var = atoi(_cmd->cmd[3]);
+		owrite = atoi(_cmd->cmd[3]);
 
 	_setenv(var, value, owrite);
 }
