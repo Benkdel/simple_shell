@@ -6,6 +6,16 @@
  */
 void print_prompt(void)
 {
+	print_simple_prompt();
+	/* print_fancy_prompt(); */
+}
+
+/**
+ * print_fancy_prompt - prints desc + username
+ * Return: none - void function
+ */
+void print_fancy_prompt(void)
+{
 	char *pwd, *home;
 	ssize_t home_found = 0;
 
@@ -30,6 +40,16 @@ void print_prompt(void)
 	write(STDOUT_FILENO, "$ ", 3);
 	if (home_found == 1)
 		free(pwd);
+}
+
+/**
+ * print_simple_prompt - prints desc + username
+ * Return: none - void function
+ */
+void print_simple_prompt(void)
+{
+	/* write simple prompt message */
+	write(STDOUT_FILENO, "#cisfun$ ", 10);
 }
 
 /**
@@ -89,18 +109,5 @@ void read_command(struct command *_cmd)
 		_cmd->status_code = EXIT_STATUS;
 		return;
 	}
-	_cmd->input[nread - 1] = '\0';
 	_cmd->size = nread;
-}
-
-/**
- * show_prev_cmd - show previous executed commands on same line
- * @_cmd: array of strings with cmd stored
- * Return: none - void function
- */
-void show_prev_cmd(struct command *_cmd)
-{
-	/* TODO */
-	/* read from file .... */
-	(void)_cmd;
 }

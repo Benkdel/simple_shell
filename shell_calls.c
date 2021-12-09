@@ -7,19 +7,21 @@
  */
 void init_shell(struct command *_cmd)
 {
-	char *user_name = getenv("USER");
+	/* char *user_name = getenv("USER"); */
 
 	_cmd->input_type = F_TERMINAL;
-	clear();
-	printf("\n\n******************");
-	printf("************************");
-	printf("\n\t****\033[0;32mShell Project\033[1;37m****");
-	printf("\n\n\t\033[1;34m> Authors:");
-	printf("\n\t\t\033[1;37m- Humberto Tejada");
-	printf("\n\t\t\033[1;37m- Carlos Bentin");
-	printf("\n\n\n\033[1;37m*******************");
-	printf("***********************");
-	printf("\n\n\n\033[0;32mCURRENT USER: \033[1;37m@%s\n", user_name);
+	/* clear(); */
+	/**
+	* printf("\n\n******************");
+	* printf("************************");
+	* printf("\n\t****\033[0;32mShell Project\033[1;37m****");
+	* printf("\n\n\t\033[1;34m> Authors:");
+	* printf("\n\t\t\033[1;37m- Humberto Tejada");
+	* printf("\n\t\t\033[1;37m- Carlos Bentin");
+	* printf("\n\n\n\033[1;37m*******************");
+	* printf("***********************");
+	* printf("\n\n\n\033[0;32mCURRENT USER: \033[1;37m@%s\n", user_name);
+	*/
 	print_prompt();
 }
 

@@ -47,16 +47,6 @@ In this project we try to emulate some functions of the `Linux Shell` using the 
 > * #include <limits.h>
 > * #include <string.h>
 
-#### Prototype:
-> TBU 
-
-#### Important information:
-> TBU
-
-#### Contributors:
-> * Humberto Tejada
-> * Carlos Bentin
-
 # Description
 The utility of our Own Shell is to interpret the commands that it will execute, commands read from a command line string, standard input or a specified file. The application must make sure that the commands to be executed are in the PATH or other functions created by us from some original linux functions.
 
@@ -105,24 +95,8 @@ The following exit values shall be returned:
 #### `127`
 > A specified command_file could not be found by a non-interactive shell.
 
-# Supported Functionality
-
-#### Supported features:
-
-##### FLAGS
-|  Flag   |             Output                                         |   Syntaxis    | Example |
-|---------|------------------------------------------------------------|---------------|---------|
-|   TBU   |  TBU		                                       | TBU           | TBU     |
-
-
-# Work n Progress
-
-#### TBU:
-
 # AUTHORS
-
 ### Contact Information
-
 ##### Please feel free to contact us regarding any matter (specially about mistakes, recomendations and gramar errors)
 
 <p align="center">
@@ -131,8 +105,6 @@ Humberto Tejada -
         <img src="https://img.shields.io/badge/Haru-mainPage-blue">
 </a>
 </p>
-
-
 
 <p align="center">
 Carlos Bentin -

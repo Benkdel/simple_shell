@@ -11,7 +11,7 @@ void _setenv(const char *variable, const char *value, int overwrite)
 {
 	if (setenv(variable, value, overwrite) != 0)
 	{
-		printf("Failed to set or modify env variable - Error Num: %d\n", errno);
+		perror("Failed to set or modify env variable");
 	}
 }
 
@@ -24,7 +24,7 @@ void _unsetenv(const char *variable)
 {
 	if (unsetenv(variable) != 0)
 	{
-		printf("Failed to delete env variable - Error Num: %d\n", errno);
+		perror("Failed to delete env variable\n");
 	}
 }
 

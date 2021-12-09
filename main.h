@@ -87,7 +87,8 @@ void sys_cmd_exec(struct command *_cmd);
 /* shell_IO.c */
 void read_command(struct command *_cmd);
 void print_prompt(void);
-void show_prev_cmd(struct command *_cmd);
+void print_simple_prompt(void);
+void print_fancy_prompt(void);
 int _getline(char **buff, size_t *size, FILE *file);
 
 /* get_builtin_cmd.c */
@@ -95,9 +96,13 @@ void (*get_builtin_cmd(const char *key))(struct command *_cmd);
 
 /* built_ins.c */
 void exit_shell(struct command *_cmd);
-void ppath(struct command *_cmd);
+void env(struct command *_cmd);
 void clear_screen(struct command *_cmd);
 void change_dir(struct command *_cmd);
+
+/* built_ins_2.c */
+void b_setenv(struct command *_cmd);
+void b_unsetenv(struct command *_cmd);
 
 /* mem_mgmt.c */
 void init_cmd(struct command *_cmd, char **envir);
@@ -126,7 +131,7 @@ int get_cmd_path(struct command *_cmd);
 int handle_status_codes(struct command *_cmd, char *main_file, char *input);
 
 /* signals_handler.c */
-void _sigint();
+void shell_signal(int sig);
 
 /* types_convert.c */
 char *to_str(int n);
