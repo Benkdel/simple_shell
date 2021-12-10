@@ -37,7 +37,6 @@ int main(int argc  __attribute__((unused)), char **argv, char **envir)
 		status = handle_status_codes(&_cmd, argv[0], _cmd.input);
 		if (status == EXIT_STATUS)
 		{
-			free(_cmd.path);
 			exit(_cmd.exit_code);
 		}
 		if (_cmd.input_type == F_TERMINAL)

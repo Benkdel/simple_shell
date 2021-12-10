@@ -41,7 +41,6 @@
 /**
  * struct command - command data structure
  * @env_list: envirorment variables
- * @path: parsed path from envi list
  * @input: command read by readline - raw
  * @cmd: array of string with parsed input > command
  * @full_cmd_path: path pre appending full name if neccesary
@@ -56,7 +55,6 @@ typedef struct command
 {
 	char **cmd;
 	char **env_list;
-	char **path;
 	char *input;
 	char *full_cmd_path;
 	int status_code;
