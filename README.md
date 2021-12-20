@@ -8,14 +8,14 @@
 </h2>
 
 <p align="center">
-    <a href="https://github.com/cristhian1107/printf/commits/main">
+    <a href="https://github.com/Benkdel/simple_shell/commits/main">
         <img src="https://img.shields.io/github/last-commit/cristhian1107/printf.svg?style=flat-square&logo=github&logoColor=white" alt="GitHub last commit">
     </a>
-    <a href="https://github.com/cristhian1107/printf/issues">
+    <a href="https://github.com/Benkdel/simple_shell/issues">
     <img src="https://img.shields.io/github/issues-raw/cristhian1107/printf.svg?style=flat-square&logo=github&logoColor=white"
          alt="GitHub issues">
     </a>
-    <a href="https://github.com/cristhian1107/printf/pulls">
+    <a href="https://github.com/Benkdel/simple/shell/pulls">
     <img src="https://img.shields.io/github/issues-pr-raw/cristhian1107/printf.svg?style=flat-square&logo=github&logoColor=white"
          alt="GitHub pull requests">
     </a>

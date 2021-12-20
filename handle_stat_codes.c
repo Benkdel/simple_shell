@@ -30,6 +30,7 @@ int handle_status_codes(struct command *_cmd, char *main_file, char *input)
 			free(str_err);
 			free(lines);
 		}
+		_cmd->exit_code = errno;
 		_cmd->status_code = BASE_STATUS;
 		status = 0;
 		break;
